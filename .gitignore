@@ -1,0 +1,11 @@
+# Canvas de design publicado como Artifact: 2,5 MB de editor embutido,
+# gerado a partir dos .dc.html. Não faz sentido versionar.
+gastro-hub.html
+
+# Pacote para arrastar no Netlify Drop — refeito a partir de preview/.
+gastro-hub-site.zip
+
+# Sistema
+Thumbs.db
+desktop.ini
+.DS_Store

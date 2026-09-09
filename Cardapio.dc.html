@@ -1,0 +1,220 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@300;400;500;600&family=Caveat+Brush&display=swap">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #0A0908; color: #F5F1EA; font-family: 'Jost', 'Century Gothic', 'Futura', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    h1, h2, h3 { font-family: 'Bodoni Moda', Didot, 'Bodoni MT', Georgia, serif; font-weight: 400; margin: 0; text-wrap: balance; }
+    p { margin: 0; text-wrap: pretty; }
+    a { color: #C9A063; text-decoration: none; }
+    a:hover { color: #E3C48F; }
+    .grain::after { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0.06; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+    .btn { transition: background 0.2s; }
+    .btn:hover { background: #E3C48F !important; }
+    .navlink { transition: color 0.2s; }
+    .navlink:hover { color: #F5F1EA !important; }
+    .tab { transition: color 0.2s, border-color 0.2s; cursor: pointer; }
+    .tab:hover { color: #F5F1EA !important; }
+    .dish { transition: background 0.2s; }
+    .dish:hover { background: rgba(201,160,99,0.05); }
+  </style>
+</helmet>
+
+<div style="width: 100%; overflow: hidden">
+
+  <header style="display: flex; align-items: center; justify-content: space-between; padding: 18px 100px; border-bottom: 1px solid rgba(245,241,234,0.08)">
+    <div style="position: relative; width: 124px; height: 70px; flex: 0 0 auto">
+      <svg width="124" height="70" viewBox="0 0 124 70" fill="none" style="position: absolute; inset: 0">
+        <ellipse cx="62" cy="35" rx="34" ry="32.5" stroke="#F5F1EA" stroke-width="2" opacity="0.9"></ellipse>
+      </svg>
+      <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center">
+        <span style="font-family: 'Caveat Brush', 'Segoe Script', 'Brush Script MT', cursive; font-size: 32px; line-height: 0.85; color: #F5F1EA">Gastr&ocirc;</span>
+        <span style="font-family: 'Caveat Brush', 'Segoe Script', 'Brush Script MT', cursive; font-size: 20px; line-height: 1; color: #F5F1EA; margin-left: 42px; margin-top: 3px">Hub</span>
+      </div>
+    </div>
+    <nav style="display: flex; align-items: center; gap: 34px; font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase">
+      <a class="navlink" href="#hub" style="color: #9C948A">O Hub</a>
+      <a class="navlink" href="#cardapio" style="color: #F5F1EA">Card&aacute;pio</a>
+      <a class="navlink" href="#eventos" style="color: #9C948A">Eventos</a>
+      <a class="navlink" href="#visite" style="color: #9C948A">Visite</a>
+    </nav>
+    <a class="btn" href="#reservar" style="display: inline-flex; align-items: center; gap: 9px; background: #C9A063; color: #0A0908; padding: 14px 22px; border-radius: 2px; font-size: 13px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 11.6a8.2 8.2 0 0 1-12 7.3L3.5 20.5l1.7-4.9a8.2 8.2 0 1 1 15.3-4Z"></path><path d="M8.6 12h.01M12 12h.01M15.4 12h.01"></path></svg>
+      Reservar mesa
+    </a>
+  </header>
+
+  <section class="grain" style="position: relative; padding: 88px 100px 60px; background: radial-gradient(90% 120% at 85% 0%, rgba(201,160,99,0.14) 0%, rgba(10,9,8,0) 60%), #0A0908; overflow: hidden">
+    <div style="position: relative; z-index: 2; display: flex; flex-direction: column; gap: 22px; max-width: 800px">
+      <span style="font-size: 12px; letter-spacing: 0.26em; text-transform: uppercase; color: #C9A063">Card&aacute;pio</span>
+      <h1 style="font-size: 72px; line-height: 1; letter-spacing: -0.015em">Escolha a cozinha.<br><em style="color: #C9A063; font-style: italic">Ou n&atilde;o escolha.</em></h1>
+      <p style="font-size: 19px; line-height: 1.62; color: #A69D92; max-width: 620px">Os quatro card&aacute;pios chegam &agrave; mesma mesa. Pe&ccedil;a entrada no Umai, principal no Galeto It&aacute;lia e sobremesa onde der vontade &mdash; tudo em uma comanda.</p>
+    </div>
+  </section>
+
+  <div style="padding: 0 100px; border-bottom: 1px solid rgba(245,241,234,0.12)">
+    <div style="display: flex; gap: 8px">
+      <sc-for list="{{tabs}}" as="tab" hint-placeholder-count="4">
+        <div class="tab" onClick="{{ tab.pick }}" style="display: flex; flex-direction: column; gap: 5px; padding: 22px 30px 20px; border-bottom: 2px solid {{tab.line}}; color: {{tab.color}}">
+          <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 26px; line-height: 1.1">{{ tab.name }}</span>
+          <span style="font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.7">{{ tab.country }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <section id="cardapio" style="padding: 66px 100px 92px; display: flex; gap: 88px; align-items: flex-start">
+    <div style="flex: 0 0 auto; width: 340px; display: flex; flex-direction: column; gap: 20px; position: relative">
+      <h2 style="font-size: 46px; line-height: 1.06">{{ current.name }}</h2>
+      <p style="font-size: 17px; line-height: 1.7; color: #9C948A">{{ current.desc }}</p>
+      <div style="height: 1px; background: rgba(245,241,234,0.12); margin: 6px 0"></div>
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <span style="font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: #7E766C">Ticket m&eacute;dio no Gastr&ocirc; Hub</span>
+        <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 30px; color: #F5F1EA">R$ 80 a R$ 180</span>
+        <span style="font-size: 14px; color: #7E766C">por pessoa &mdash; confirmar antes de publicar</span>
+      </div>
+    </div>
+
+    <div style="flex: 1 1 auto; display: flex; flex-direction: column">
+      <sc-for list="{{current.dishes}}" as="dish" hint-placeholder-count="4">
+        <div class="dish" style="display: flex; align-items: baseline; gap: 22px; padding: 24px 18px; border-bottom: 1px solid rgba(245,241,234,0.10)">
+          <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 15px; color: #C9A063; width: 30px; flex: 0 0 auto; opacity: 0.8">{{ dish.num }}</span>
+          <div style="display: flex; flex-direction: column; gap: 6px; flex: 1 1 auto">
+            <span style="font-size: 22px; line-height: 1.25; color: {{dish.color}}">{{ dish.name }}</span>
+            <span style="font-size: 15px; line-height: 1.6; color: #7E766C">{{ dish.desc }}</span>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="border-top: 1px solid rgba(245,241,234,0.10); border-bottom: 1px solid rgba(245,241,234,0.10); background: #0D0B09; padding: 66px 100px; display: flex; flex-direction: column; gap: 30px">
+    <div style="display: flex; align-items: baseline; gap: 20px">
+      <h2 style="font-size: 34px; line-height: 1.1">Os mais citados nas avalia&ccedil;&otilde;es</h2>
+      <span style="font-size: 14px; color: #7E766C">o que os clientes mais mencionam por nome no Google</span>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; gap: 12px">
+      <span style="border: 1px solid rgba(245,241,234,0.16); padding: 12px 22px; border-radius: 2px; font-size: 16px; color: #CFC7BB">Burrata</span>
+      <span style="border: 1px solid rgba(245,241,234,0.16); padding: 12px 22px; border-radius: 2px; font-size: 16px; color: #CFC7BB">Fil&eacute; mignon</span>
+      <span style="border: 1px solid rgba(245,241,234,0.16); padding: 12px 22px; border-radius: 2px; font-size: 16px; color: #CFC7BB">Polvo</span>
+      <span style="border: 1px solid rgba(245,241,234,0.16); padding: 12px 22px; border-radius: 2px; font-size: 16px; color: #CFC7BB">Risoto de camar&atilde;o</span>
+      <span style="border: 1px solid rgba(245,241,234,0.16); padding: 12px 22px; border-radius: 2px; font-size: 16px; color: #CFC7BB">Bife Denver</span>
+      <span style="border: 1px solid rgba(245,241,234,0.16); padding: 12px 22px; border-radius: 2px; font-size: 16px; color: #CFC7BB">Rolinho primavera</span>
+      <span style="border: 1px solid rgba(245,241,234,0.16); padding: 12px 22px; border-radius: 2px; font-size: 16px; color: #CFC7BB">Tiramis&ugrave;</span>
+      <span style="border: 1px solid rgba(245,241,234,0.16); padding: 12px 22px; border-radius: 2px; font-size: 16px; color: #CFC7BB">Petit gateau</span>
+    </div>
+  </section>
+
+  <section id="reservar" style="padding: 96px 100px; display: flex; align-items: center; justify-content: space-between; gap: 60px">
+    <div style="display: flex; flex-direction: column; gap: 16px; max-width: 620px">
+      <h2 style="font-size: 50px; line-height: 1.06">Card&aacute;pio completo e sugest&otilde;es do dia</h2>
+      <p style="font-size: 18px; line-height: 1.6; color: #A69D92">Manda uma mensagem que enviamos o card&aacute;pio atualizado das quatro cozinhas e j&aacute; deixamos sua mesa reservada.</p>
+    </div>
+    <a class="btn" href="#reservar" style="flex: 0 0 auto; display: inline-flex; align-items: center; gap: 12px; background: #C9A063; color: #0A0908; padding: 22px 40px; border-radius: 2px; font-size: 17px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 11.6a8.2 8.2 0 0 1-12 7.3L3.5 20.5l1.7-4.9a8.2 8.2 0 1 1 15.3-4Z"></path><path d="M8.6 12h.01M12 12h.01M15.4 12h.01"></path></svg>
+      Falar no WhatsApp
+    </a>
+  </section>
+
+  <footer style="border-top: 1px solid rgba(245,241,234,0.10); padding: 46px 100px; display: flex; justify-content: space-between; align-items: center; background: #0A0908">
+    <span style="font-size: 14px; color: #7E766C">Av. do Contorno, 4667 &mdash; Serra, Belo Horizonte/MG &middot; (31) 2527-5858</span>
+    <span style="font-size: 13px; color: #6F6860">&copy; 2026 Gastr&ocirc; Hub</span>
+  </footer>
+
+</div>
+</x-dc>
+<script data-dc-script data-props='{"$preview":{"width":1440,"height":2300}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const kitchens = [
+      {
+        id: 'italia',
+        name: 'Galeto Itália',
+        country: 'Itália',
+        desc: 'A casa italiana do Hub. Massas, risotos e o galeto desossado grelhado que dá nome ao restaurante.',
+        dishes: [
+          { name: 'Lasanha gratinada', desc: 'Clássico da casa.', slot: false },
+          { name: 'Risoto de camarão ao pomodoro', desc: 'Com manjericão fresco.', slot: false },
+          { name: 'Galeto desossado grelhado', desc: 'O prato que dá nome à casa.', slot: false },
+          { name: '[Mais um prato do Galeto Itália]', desc: '[descrição do prato]', slot: true }
+        ]
+      },
+      {
+        id: 'china',
+        name: 'Jin Lon',
+        country: 'China',
+        desc: 'Cozinha chinesa no wok, com massa artesanal preparada na casa.',
+        dishes: [
+          { name: 'Talharim chop suey artesanal', desc: 'Massa da casa com carne, porco, acelga e cenoura.', slot: false },
+          { name: 'Lombo agridoce', desc: '[acompanhamento e ponto do prato]', slot: false },
+          { name: 'Camarão imperador flambado', desc: 'Ao molho curry.', slot: false },
+          { name: '[Mais um prato do Jin Lon]', desc: '[descrição do prato]', slot: true }
+        ]
+      },
+      {
+        id: 'japao',
+        name: 'Umai',
+        country: 'Japão',
+        desc: 'Sushi, sashimi e temaki preparados na hora.',
+        dishes: [
+          { name: '[Combinado assinatura do Umai]', desc: 'Nome + o que vem no combinado.', slot: true },
+          { name: '[Prato quente do Umai]', desc: 'Um yakisoba, um teppan, o que for da casa.', slot: true },
+          { name: '[Temaki ou uramaki da casa]', desc: 'O mais pedido do sushi bar.', slot: true },
+          { name: '[Entrada japonesa]', desc: 'Guioza, sunomono, o que estiver no cardápio.', slot: true }
+        ]
+      },
+      {
+        id: 'brasil',
+        name: 'Bón',
+        country: 'Brasil',
+        desc: 'Cozinha brasileira contemporânea, para a mesa que quer o de sempre bem feito.',
+        dishes: [
+          { name: '[Carne assinatura do Bón]', desc: 'O corte que a casa mais vende.', slot: true },
+          { name: '[Prato de peixe ou frutos do mar]', desc: 'Com a guarnição que acompanha.', slot: true },
+          { name: '[Opção para dividir]', desc: 'Prato para duas pessoas, se houver.', slot: true },
+          { name: '[Sobremesa da casa]', desc: '[nome da sobremesa da casa]', slot: true }
+        ]
+      }
+    ];
+
+    const active = (this.state && this.state.active) || 'italia';
+    const current = kitchens.filter(function (k) { return k.id === active; })[0] || kitchens[0];
+    const self = this;
+
+    return {
+      tabs: kitchens.map(function (k) {
+        const on = k.id === active;
+        return {
+          id: k.id,
+          name: k.name,
+          country: k.country,
+          color: on ? '#F5F1EA' : '#7E766C',
+          line: on ? '#C9A063' : 'transparent',
+          pick: function () { self.setState({ active: k.id }); }
+        };
+      }),
+      current: {
+        name: current.name,
+        desc: current.desc,
+        dishes: current.dishes.map(function (d, i) {
+          return {
+            num: (i + 1) < 10 ? '0' + (i + 1) : String(i + 1),
+            name: d.name,
+            desc: d.desc,
+            color: d.slot ? '#6F6860' : '#F5F1EA'
+          };
+        })
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

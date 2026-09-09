@@ -1,0 +1,15 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html", "title": "Home", "x": 0, "y": 0, "w": 1440, "h": 5800, "print": "flow" },
+    { "file": "Cardapio.dc.html", "title": "Cardápio", "x": 1560, "y": 0, "w": 1440, "h": 2300, "print": "flow", "is_interactive": true },
+    { "file": "Eventos.dc.html", "title": "Eventos", "x": 3120, "y": 0, "w": 1440, "h": 4500, "print": "flow" },
+    { "file": "Mobile.dc.html", "title": "Home no celular", "x": 4680, "y": 0, "w": 390, "h": 4600, "print": "flow" }
+  ],
+  "annotations": [
+    { "id": "nota-home", "x": 0, "y": -300, "w": 420, "text": "HOME\nUm CTA principal repetido em toda a página: Reservar no WhatsApp. O funil de eventos é o segundo caminho, sempre secundário aqui.\n\nO hero está com fundo atmosférico em CSS — é o lugar do vídeo em loop do salão, quando você tiver." },
+    { "id": "nota-cardapio", "x": 1560, "y": -300, "w": 400, "text": "CARDÁPIO\nAs abas funcionam: clique em Galeto Itália, Jin Lon, Umai e Bón.\n\nGaleto Itália e Jin Lon estão com pratos reais citados na imprensa. Umai e Bón estão com slots [entre colchetes] esperando o cardápio de vocês." },
+    { "id": "nota-eventos", "x": 3120, "y": -300, "w": 400, "text": "EVENTOS\nPágina própria, porque é outro cliente e outra decisão: 170 m², 20 a 70 pessoas, dois modelos de contratação e formulário de orçamento com WhatsApp ao lado." },
+    { "id": "nota-mobile", "x": 4680, "y": -300, "w": 380, "text": "CELULAR\nA home a 390px, onde vem a maior parte do tráfego de restaurante. Barra de reserva fixa no rodapé e botões de 52 a 58px de altura." }
+  ],
+  "launch": { "view": "canvas" }
+}

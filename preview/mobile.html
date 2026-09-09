@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Fora do Google enquanto for demonstração: a página ainda tem campos entre
+     colchetes e números por confirmar. Remover quando o site for pra valer. -->
+<meta name="robots" content="noindex, nofollow">
+<title>Gastrô Hub — celular</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@300;400;500;600&family=Caveat+Brush&display=swap">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #0A0908; color: #F5F1EA; font-family: 'Jost', 'Century Gothic', 'Futura', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    h1, h2, h3 { font-family: 'Bodoni Moda', Didot, 'Bodoni MT', Georgia, serif; font-weight: 400; margin: 0; text-wrap: balance; }
+    p { margin: 0; text-wrap: pretty; }
+    a { color: #C9A063; text-decoration: none; }
+    a:hover { color: #E3C48F; }
+    .grain::after { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0.06; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+    @keyframes marq { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .marq { display: flex; width: max-content; animation: marq 26s linear infinite; }
+    @keyframes halo { 0%, 100% { opacity: 0.5; } 50% { opacity: 0.85; } }
+    .halo { animation: halo 11s ease-in-out infinite; }
+  </style>
+<style>
+
+  :root { --gutter: clamp(20px, 5vw, 100px); --brass: #C9A063; }
+  html { scroll-behavior: smooth; }
+  body { overflow-x: clip; }
+  [id] { scroll-margin-top: 104px; }
+  [style*="flex: 1 1 auto"] { min-width: 0; }
+
+  /* !important porque os artboards trazem position/z-index no atributo style. */
+  .site-header { position: sticky !important; top: 0 !important; z-index: 60 !important; transition: padding .35s ease, background-color .35s ease, border-color .35s ease; }
+  .site-header.is-stuck { padding-top: 10px !important; padding-bottom: 10px !important; background: rgba(10,9,8,0.88); backdrop-filter: blur(14px) saturate(120%); -webkit-backdrop-filter: blur(14px) saturate(120%); border-bottom-color: rgba(245,241,234,0.14) !important; }
+  .logo-link { transition: opacity .25s ease; }
+  .logo-link:hover { opacity: .8; }
+
+  .site-nav { position: relative; }
+  .nav-ink { position: absolute; top: 0; left: 0; height: 2px; width: 0; background: var(--brass); border-radius: 2px; opacity: 0; pointer-events: none; transition: transform .45s cubic-bezier(.22,.61,.36,1), width .45s cubic-bezier(.22,.61,.36,1), opacity .3s ease; }
+  .navlink, .nav-back { transition: color .25s ease; }
+  .nav-back svg { transition: transform .25s ease; }
+  .nav-back:hover svg { transform: translateX(-3px); }
+
+  /* A transição só entra depois que o estado inicial já foi aplicado (.anim),
+     senão o bloco aparece e desaparece antes de entrar em cena. */
+  .reveal { opacity: 0; transform: translateY(20px); }
+  .reveal.anim { transition: opacity .8s cubic-bezier(.22,.61,.36,1), transform .8s cubic-bezier(.22,.61,.36,1); }
+  .reveal.is-in { opacity: 1; transform: none; }
+
+  .ghost svg { transition: transform .25s ease; }
+  .ghost:hover svg { transform: translateX(3px); }
+  .marq:hover { animation-play-state: paused; }
+  [data-panel] { transition: opacity .35s ease; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal, .reveal.is-in { opacity: 1; transform: none; transition: none; }
+    .marq { animation: none; }
+    .site-header { transition: none; }
+  }
+
+  /* Em telas largas a página para de esticar e fica centralizada. */
+  body > div { max-width: 430px; margin: 0 auto; }
+</style>
+</head>
+<body>
+<div style="width: 100%; overflow-x: clip">
+
+  <header class="site-header" style="display: flex; align-items: center; justify-content: space-between; padding: 8px 20px; border-bottom: 1px solid rgba(245,241,234,0.08); background: #0A0908">
+    <a href="index.html" class="logo-link" style="display: block; flex: 0 0 auto"><div style="position: relative; width: 96px; height: 56px; flex: 0 0 auto">
+      <svg width="96" height="56" viewBox="0 0 96 56" fill="none" style="position: absolute; inset: 0">
+        <ellipse cx="48" cy="28" rx="26.5" ry="25.5" stroke="#F5F1EA" stroke-width="1.7" opacity="0.9"></ellipse>
+      </svg>
+      <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center">
+        <span style="font-family: 'Caveat Brush', 'Segoe Script', 'Brush Script MT', cursive; font-size: 25px; line-height: 0.85; color: #F5F1EA">Gastr&ocirc;</span>
+        <span style="font-family: 'Caveat Brush', 'Segoe Script', 'Brush Script MT', cursive; font-size: 16px; line-height: 1; color: #F5F1EA; margin-left: 32px; margin-top: 2px">Hub</span>
+      </div>
+    </div></a>
+    <a href="#menu" style="width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(245,241,234,0.16); border-radius: 2px">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F5F1EA" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+    </a>
+  </header>
+
+  <section class="grain" style="position: relative; padding: 48px 24px 44px; background: radial-gradient(130% 70% at 20% 100%, rgba(201,160,99,0.22) 0%, rgba(201,160,99,0) 60%), linear-gradient(180deg, #0E0C0A 0%, #0A0908 100%); overflow: hidden">
+    <div class="halo" style="position: absolute; left: -120px; bottom: -160px; width: 380px; height: 380px; border-radius: 50%; background: radial-gradient(circle, rgba(201,160,99,0.28) 0%, rgba(201,160,99,0) 68%); filter: blur(18px); pointer-events: none"></div>
+    <div style="position: relative; z-index: 2; display: flex; flex-direction: column; gap: 20px">
+      <span style="font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: #C9A063">Belo Horizonte &middot; Serra</span>
+      <h1 style="font-size: 40px; line-height: 1.02; letter-spacing: -0.015em">Quatro cozinhas.<br><em style="color: #C9A063; font-style: italic">Uma mesa s&oacute;.</em></h1>
+      <p style="font-size: 17px; line-height: 1.6; color: #A69D92">It&aacute;lia, China, Jap&atilde;o e Brasil no mesmo sal&atilde;o da Avenida do Contorno. Cada um pede o que quer, na mesma comanda.</p>
+      <a href="https://wa.me/553125275858" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: #C9A063; color: #0A0908; height: 58px; border-radius: 2px; font-size: 15px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 6px">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 11.6a8.2 8.2 0 0 1-12 7.3L3.5 20.5l1.7-4.9a8.2 8.2 0 1 1 15.3-4Z"></path><path d="M8.6 12h.01M12 12h.01M15.4 12h.01"></path></svg>
+        Reservar no WhatsApp
+      </a>
+      <a href="eventos.html" style="display: flex; align-items: center; justify-content: center; gap: 9px; border: 1px solid rgba(245,241,234,0.25); color: #F5F1EA; height: 54px; border-radius: 2px; font-size: 15px">
+        Fazer meu evento aqui
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"></path></svg>
+      </a>
+      <div style="display: flex; align-items: center; gap: 10px; padding-top: 18px; margin-top: 6px; border-top: 1px solid rgba(245,241,234,0.10)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#C9A063"><path d="M12 3.2l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.6 6.8 19.3l1-5.8L3.5 9.4l5.9-.9L12 3.2Z"></path></svg>
+        <span style="font-size: 14px; color: #F5F1EA"><strong style="font-weight: 500">4,8</strong> no Google</span>
+        <span style="width: 1px; height: 13px; background: rgba(245,241,234,0.16)"></span>
+        <span style="font-size: 14px; color: #A69D92">4.700+ avalia&ccedil;&otilde;es</span>
+      </div>
+    </div>
+  </section>
+
+  <div style="border-top: 1px solid rgba(245,241,234,0.10); border-bottom: 1px solid rgba(245,241,234,0.10); background: #0D0B09; padding: 14px 0; overflow: hidden">
+    <div class="marq">
+      <div style="display: flex; align-items: center; gap: 24px; padding-right: 24px">
+        <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 20px; white-space: nowrap">Galeto It&aacute;lia</span>
+        <span style="width: 5px; height: 5px; border-radius: 50%; background: #C9A063; flex: 0 0 auto"></span>
+        <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 20px; white-space: nowrap">Jin Lon</span>
+        <span style="width: 5px; height: 5px; border-radius: 50%; background: #C9A063; flex: 0 0 auto"></span>
+        <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 20px; white-space: nowrap">Umai</span>
+        <span style="width: 5px; height: 5px; border-radius: 50%; background: #C9A063; flex: 0 0 auto"></span>
+        <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 20px; white-space: nowrap">B&oacute;n</span>
+        <span style="width: 5px; height: 5px; border-radius: 50%; background: #C9A063; flex: 0 0 auto"></span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 24px; padding-right: 24px">
+        <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 20px; white-space: nowrap">Galeto It&aacute;lia</span>
+        <span style="width: 5px; height: 5px; border-radius: 50%; background: #C9A063; flex: 0 0 auto"></span>
+        <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 20px; white-space: nowrap">Jin Lon</span>
+        <span style="width: 5px; height: 5px; border-radius: 50%; background: #C9A063; flex: 0 0 auto"></span>
+        <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 20px; white-space: nowrap">Umai</span>
+        <span style="width: 5px; height: 5px; border-radius: 50%; background: #C9A063; flex: 0 0 auto"></span>
+        <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 20px; white-space: nowrap">B&oacute;n</span>
+        <span style="width: 5px; height: 5px; border-radius: 50%; background: #C9A063; flex: 0 0 auto"></span>
+      </div>
+    </div>
+  </div>
+
+  <section style="padding: 56px 24px; display: flex; flex-direction: column; gap: 30px">
+    <div style="display: flex; flex-direction: column; gap: 14px">
+      <span style="font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: #C9A063">O Hub</span>
+      <h2 style="font-size: 36px; line-height: 1.1">A mesa nunca mais precisa chegar a um acordo.</h2>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 1px; background: rgba(245,241,234,0.12); border: 1px solid rgba(245,241,234,0.12)">
+      <div style="background: #0A0908; padding: 28px 24px; display: flex; flex-direction: column; gap: 12px">
+        <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 32px; color: #C9A063; line-height: 1">01</span>
+        <h3 style="font-size: 22px; line-height: 1.2">O impasse de sempre</h3>
+        <p style="font-size: 15px; line-height: 1.68; color: #9C948A">Um quer japonesa, outro quer massa, a crian&ccedil;a quer galeto. Escolher restaurante vira negocia&ccedil;&atilde;o.</p>
+      </div>
+      <div style="background: #0A0908; padding: 28px 24px; display: flex; flex-direction: column; gap: 12px">
+        <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 32px; color: #C9A063; line-height: 1">02</span>
+        <h3 style="font-size: 22px; line-height: 1.2">Quatro cozinhas, um sal&atilde;o</h3>
+        <p style="font-size: 15px; line-height: 1.68; color: #9C948A">Galeto It&aacute;lia, Jin Lon, Umai e B&oacute;n operam lado a lado, cada um com sua brigada e seu card&aacute;pio.</p>
+      </div>
+      <div style="background: #0A0908; padding: 28px 24px; display: flex; flex-direction: column; gap: 12px">
+        <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 32px; color: #C9A063; line-height: 1">03</span>
+        <h3 style="font-size: 22px; line-height: 1.2">Ningu&eacute;m abre m&atilde;o</h3>
+        <p style="font-size: 15px; line-height: 1.68; color: #9C948A">Entrada japonesa, prato italiano, sobremesa a escolher. Um pedido, uma conta.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding: 0 24px 56px; display: flex; flex-direction: column; gap: 24px">
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 16px">
+      <h2 style="font-size: 34px; line-height: 1.08">As quatro casas</h2>
+      <a href="cardapio.html" style="display: flex; align-items: center; min-height: 44px; padding: 0 2px; font-size: 15px; white-space: nowrap; border-bottom: 1px solid rgba(201,160,99,0.5)">Ver card&aacute;pio</a>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 12px">
+      <div style="border: 1px solid rgba(245,241,234,0.12); background: linear-gradient(180deg, #100E0C 0%, #0A0908 100%); padding: 24px 22px; display: flex; flex-direction: column; gap: 10px">
+        <span style="font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: #C9A063">It&aacute;lia</span>
+        <h3 style="font-size: 26px; line-height: 1.1">Galeto It&aacute;lia</h3>
+        <p style="font-size: 15px; line-height: 1.6; color: #9C948A">Massas, risotos e o galeto desossado grelhado que d&aacute; nome &agrave; casa.</p>
+      </div>
+      <div style="border: 1px solid rgba(245,241,234,0.12); background: linear-gradient(180deg, #100E0C 0%, #0A0908 100%); padding: 24px 22px; display: flex; flex-direction: column; gap: 10px">
+        <span style="font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: #C9A063">China</span>
+        <h3 style="font-size: 26px; line-height: 1.1">Jin Lon</h3>
+        <p style="font-size: 15px; line-height: 1.6; color: #9C948A">Cozinha chinesa no wok, com massa artesanal feita na casa.</p>
+      </div>
+      <div style="border: 1px solid rgba(245,241,234,0.12); background: linear-gradient(180deg, #100E0C 0%, #0A0908 100%); padding: 24px 22px; display: flex; flex-direction: column; gap: 10px">
+        <span style="font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: #C9A063">Jap&atilde;o</span>
+        <h3 style="font-size: 26px; line-height: 1.1">Umai</h3>
+        <p style="font-size: 15px; line-height: 1.6; color: #9C948A">Sushi, sashimi e temaki preparados na hora.</p>
+      </div>
+      <div style="border: 1px solid rgba(245,241,234,0.12); background: linear-gradient(180deg, #100E0C 0%, #0A0908 100%); padding: 24px 22px; display: flex; flex-direction: column; gap: 10px">
+        <span style="font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: #C9A063">Brasil</span>
+        <h3 style="font-size: 26px; line-height: 1.1">B&oacute;n</h3>
+        <p style="font-size: 15px; line-height: 1.6; color: #9C948A">Cozinha brasileira contempor&acirc;nea, para quem quer o de sempre.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="border-top: 1px solid rgba(245,241,234,0.10); border-bottom: 1px solid rgba(245,241,234,0.10); background: #0D0B09; padding: 36px 24px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 20px">
+    <div style="display: flex; flex-direction: column; gap: 5px">
+      <span data-count style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 38px; line-height: 1">4,8</span>
+      <span style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #7E766C">Nota no Google</span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 5px">
+      <span data-count style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 38px; line-height: 1">4.700+</span>
+      <span style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #7E766C">Avalia&ccedil;&otilde;es</span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 5px">
+      <span data-count style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 38px; line-height: 1">30+</span>
+      <span style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #7E766C">Anos de gastronomia</span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 5px">
+      <span data-count style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 38px; line-height: 1">170 m&sup2;</span>
+      <span style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #7E766C">Espa&ccedil;o de eventos</span>
+    </div>
+  </section>
+
+  <section class="grain" style="position: relative; padding: 56px 24px; background: linear-gradient(160deg, #16110B 0%, #0A0908 70%); overflow: hidden">
+    <div style="position: relative; z-index: 2; display: flex; flex-direction: column; gap: 18px">
+      <span style="font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: #C9A063">Espa&ccedil;o de eventos</span>
+      <h2 style="font-size: 36px; line-height: 1.08">Um andar inteiro s&oacute; para o seu evento.</h2>
+      <p style="font-size: 16px; line-height: 1.62; color: #A69D92">170 m&sup2; no subsolo, com entrada e cozinha independentes. De 20 a 70 pessoas.</p>
+      <div style="display: flex; flex-direction: column; gap: 11px; padding-top: 8px">
+        <div style="display: flex; gap: 11px; align-items: flex-start"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A063" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="flex: 0 0 auto; margin-top: 2px"><path d="M4 12.5l5 5 11-11"></path></svg><span style="font-size: 15px; line-height: 1.5; color: #CFC7BB">Projetor com tel&atilde;o de 95&Prime; e 9 caixas de som</span></div>
+        <div style="display: flex; gap: 11px; align-items: flex-start"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A063" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="flex: 0 0 auto; margin-top: 2px"><path d="M4 12.5l5 5 11-11"></path></svg><span style="font-size: 15px; line-height: 1.5; color: #CFC7BB">Microfone, multim&iacute;dia e ilumina&ccedil;&atilde;o pr&oacute;pria</span></div>
+        <div style="display: flex; gap: 11px; align-items: flex-start"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A063" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="flex: 0 0 auto; margin-top: 2px"><path d="M4 12.5l5 5 11-11"></path></svg><span style="font-size: 15px; line-height: 1.5; color: #CFC7BB">Com a gastronomia da casa ou s&oacute; a loca&ccedil;&atilde;o</span></div>
+      </div>
+      <a href="eventos.html#orcamento" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: #C9A063; color: #0A0908; height: 58px; border-radius: 2px; font-size: 15px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 12px">Pedir or&ccedil;amento</a>
+    </div>
+  </section>
+
+  <section style="border-top: 1px solid rgba(245,241,234,0.10); padding: 56px 24px; display: flex; flex-direction: column; gap: 26px">
+    <div style="display: flex; flex-direction: column; gap: 14px">
+      <span style="font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: #C9A063">Visite</span>
+      <h2 style="font-size: 34px; line-height: 1.08">Av. do Contorno, 4667</h2>
+      <span style="font-size: 16px; color: #9C948A">Bairro Serra, Belo Horizonte &mdash; MG</span>
+    </div>
+    <div style="height: 190px; border: 1px solid rgba(245,241,234,0.14); background: repeating-linear-gradient(45deg, #100E0C 0px, #100E0C 10px, #0C0A09 10px, #0C0A09 20px); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C9A063" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
+      <span style="font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #6F6860">[Mapa incorporado]</span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 12px; padding-top: 4px">
+      <div style="display: flex; justify-content: space-between; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid rgba(245,241,234,0.10)"><span style="font-size: 15px; color: #9C948A">Seg a sex</span><span style="font-size: 15px; color: #F5F1EA; text-align: right">11h&ndash;15h &middot; 18h&ndash;22h30</span></div>
+      <div style="display: flex; justify-content: space-between; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid rgba(245,241,234,0.10)"><span style="font-size: 15px; color: #9C948A">S&aacute;bado</span><span style="font-size: 15px; color: #F5F1EA; text-align: right">11h&ndash;16h &middot; 18h&ndash;22h30</span></div>
+      <div style="display: flex; justify-content: space-between; gap: 12px"><span style="font-size: 15px; color: #9C948A">Domingo</span><span style="font-size: 15px; color: #F5F1EA; text-align: right">11h&ndash;22h</span></div>
+    </div>
+  </section>
+
+  <footer style="border-top: 1px solid rgba(245,241,234,0.10); padding: 40px 24px 32px; display: flex; flex-direction: column; gap: 22px; background: #0A0908">
+    <div style="position: relative; width: 96px; height: 56px">
+      <svg width="96" height="56" viewBox="0 0 96 56" fill="none" style="position: absolute; inset: 0">
+        <ellipse cx="48" cy="28" rx="26.5" ry="25.5" stroke="#F5F1EA" stroke-width="1.7" opacity="0.85"></ellipse>
+      </svg>
+      <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center">
+        <span style="font-family: 'Caveat Brush', 'Segoe Script', 'Brush Script MT', cursive; font-size: 25px; line-height: 0.85; color: #F5F1EA">Gastr&ocirc;</span>
+        <span style="font-family: 'Caveat Brush', 'Segoe Script', 'Brush Script MT', cursive; font-size: 16px; line-height: 1; color: #F5F1EA; margin-left: 32px; margin-top: 2px">Hub</span>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 7px">
+      <a href="tel:+553125275858" style="display: flex; align-items: center; min-height: 44px; font-size: 16px; color: #F5F1EA">(31) 2527-5858</a>
+      <a href="https://www.instagram.com/gastrohub.bh/" style="display: flex; align-items: center; min-height: 44px; font-size: 16px">@gastrohub.bh</a>
+    </div>
+    <span style="font-size: 12px; color: #6F6860; padding-top: 6px; border-top: 1px solid rgba(245,241,234,0.08)">&copy; 2026 Gastr&ocirc; Hub &mdash; Restaurante e Espa&ccedil;o de Eventos</span>
+  </footer>
+
+  <div style="border-top: 1px solid rgba(245,241,234,0.14); background: #100E0C; padding: 12px 16px; display: flex; gap: 10px">
+    <a href="https://wa.me/553125275858" style="flex: 1 1 auto; display: flex; align-items: center; justify-content: center; gap: 9px; background: #C9A063; color: #0A0908; height: 52px; border-radius: 2px; font-size: 14px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 11.6a8.2 8.2 0 0 1-12 7.3L3.5 20.5l1.7-4.9a8.2 8.2 0 1 1 15.3-4Z"></path><path d="M8.6 12h.01M12 12h.01M15.4 12h.01"></path></svg>
+      Reservar
+    </a>
+    <a href="#visite" style="flex: 0 0 auto; width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(245,241,234,0.22); border-radius: 2px">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F5F1EA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
+    </a>
+  </div>
+
+</div>
+<script>
+(function () {
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var page = location.pathname.split('/').pop() || 'index.html';
+
+  /* cabeçalho condensa ao rolar */
+  var header = document.querySelector('.site-header');
+  if (header) {
+    var stick = function () { header.classList.toggle('is-stuck', window.scrollY > 60); };
+    addEventListener('scroll', stick, { passive: true });
+    stick();
+  }
+
+  /* barrinha dourada que desliza entre os itens do menu */
+  var nav = document.querySelector('.site-nav');
+  if (nav) {
+    var ink = nav.querySelector('.nav-ink');
+    var links = [].slice.call(nav.querySelectorAll('a[href]')).filter(function (a) {
+      return !a.hasAttribute('data-nav-skip');
+    });
+    var active = null;
+
+    var place = function (link, animate) {
+      if (!link || !ink) return;
+      if (!animate) ink.style.transition = 'none';
+      ink.style.width = link.offsetWidth + 'px';
+      ink.style.transform = 'translate(' + link.offsetLeft + 'px,' + (link.offsetTop + link.offsetHeight + 9) + 'px)';
+      ink.style.opacity = '1';
+      if (!animate) { void ink.offsetWidth; ink.style.transition = ''; }
+    };
+    var setActive = function (link, animate) {
+      if (!link) return;
+      active = link;
+      links.forEach(function (a) { a.style.color = (a === link) ? '#F5F1EA' : '#9C948A'; });
+      place(link, animate !== false);
+    };
+    var spyOf = function (a) {
+      var s = a.getAttribute('data-spy');
+      if (s) return s;
+      var h = a.getAttribute('href') || '';
+      return h.charAt(0) === '#' ? h : null;
+    };
+
+    var sections = [];
+    links.forEach(function (a) {
+      var sel = spyOf(a);
+      var el = sel ? document.querySelector(sel) : null;
+      if (el) sections.push({ link: a, el: el });
+    });
+    var current = links.filter(function (a) { return (a.getAttribute('href') || '') === page; })[0];
+
+    setActive(current || (sections[0] && sections[0].link) || links[0], false);
+
+    links.forEach(function (a) {
+      a.addEventListener('mouseenter', function () { place(a, true); });
+      a.addEventListener('click', function () { setActive(a); });
+    });
+    nav.addEventListener('mouseleave', function () { place(active, true); });
+    addEventListener('resize', function () { place(active, false); });
+
+    if (!current && sections.length) {
+      var spy = function () {
+        var mark = innerHeight * 0.3, best = null;
+        sections.forEach(function (s) {
+          var r = s.el.getBoundingClientRect();
+          if (r.top <= mark && r.bottom > mark) best = s;
+        });
+        if (!best) {
+          best = sections[0].el.getBoundingClientRect().top > mark ? sections[0] : sections[sections.length - 1];
+        }
+        if (best && best.link !== active) setActive(best.link);
+      };
+      addEventListener('scroll', spy, { passive: true });
+      spy();
+    }
+  }
+
+  /* blocos entram com um fade curto ao aparecer */
+  if (!reduce && 'IntersectionObserver' in window) {
+    var items = [];
+    [].forEach.call(document.querySelectorAll('section, footer'), function (sec) {
+      var group = [];
+      [].forEach.call(sec.children, function (child) {
+        var cs = getComputedStyle(child);
+        if (cs.position === 'absolute' || cs.display === 'none') return;
+        if (cs.display === 'grid' && child.children.length > 1) {
+          [].forEach.call(child.children, function (g) { group.push(g); });
+        } else {
+          group.push(child);
+        }
+      });
+      group.forEach(function (el, i) {
+        el.classList.add('reveal');
+        el.style.transitionDelay = Math.min(i * 70, 350) + 'ms';
+        items.push(el);
+      });
+    });
+    void document.body.offsetHeight;
+    items.forEach(function (el) { el.classList.add('anim'); });
+
+    /* Depois de entrar, o bloco larga as classes de animação: assim a
+       visibilidade final não depende da transição ter conseguido rodar. */
+    var settle = function (el) {
+      setTimeout(function () {
+        el.classList.remove('reveal', 'anim', 'is-in');
+        el.style.transitionDelay = '';
+      }, 1300);
+    };
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('is-in');
+        io.unobserve(e.target);
+        settle(e.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    items.forEach(function (el) { io.observe(el); });
+
+    /* Rede de segurança: se o observador não responder, o conteúdo aparece
+       do mesmo jeito. Conteúdo invisível é pior que animação perdida. */
+    setTimeout(function () {
+      if (!document.querySelector('.reveal.is-in')) {
+        items.forEach(function (el) { el.classList.add('is-in'); settle(el); });
+      }
+    }, 1400);
+  }
+
+  /* números sobem de zero até o valor */
+  var counters = document.querySelectorAll('[data-count]');
+  if (counters.length && !reduce && 'IntersectionObserver' in window) {
+    var run = function (el) {
+      var raw = el.textContent.trim();
+      if (/ a /.test(raw)) return;
+      var m = raw.match(/^([0-9.,]+)(.*)$/);
+      if (!m) return;
+      var digits = m[1], suffix = m[2];
+      var decimals = (digits.split(',')[1] || '').length;
+      var grouped = digits.indexOf('.') > -1;
+      var target = parseFloat(digits.replace(/\./g, '').replace(',', '.'));
+      if (!isFinite(target)) return;
+      var fmt = function (v) {
+        var s = decimals ? v.toFixed(decimals).replace('.', ',') : String(Math.round(v));
+        if (grouped) s = s.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        return s + suffix;
+      };
+      var t0 = null;
+      var step = function (now) {
+        if (t0 === null) t0 = now;
+        var p = Math.min((now - t0) / 1200, 1);
+        el.textContent = fmt(target * (1 - Math.pow(1 - p, 3)));
+        if (p < 1) requestAnimationFrame(step); else el.textContent = raw;
+      };
+      el.textContent = fmt(0);
+      requestAnimationFrame(step);
+    };
+    var cio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { run(e.target); cio.unobserve(e.target); }
+      });
+    }, { threshold: 0.4 });
+    [].forEach.call(counters, function (el) { cio.observe(el); });
+  }
+})();
+</script>
+
+</body>
+</html>

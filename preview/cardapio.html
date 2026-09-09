@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Fora do Google enquanto for demonstração: a página ainda tem campos entre
+     colchetes e números por confirmar. Remover quando o site for pra valer. -->
+<meta name="robots" content="noindex, nofollow">
+<title>Cardápio — Gastrô Hub</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@300;400;500;600&family=Caveat+Brush&display=swap">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #0A0908; color: #F5F1EA; font-family: 'Jost', 'Century Gothic', 'Futura', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    h1, h2, h3 { font-family: 'Bodoni Moda', Didot, 'Bodoni MT', Georgia, serif; font-weight: 400; margin: 0; text-wrap: balance; }
+    p { margin: 0; text-wrap: pretty; }
+    a { color: #C9A063; text-decoration: none; }
+    a:hover { color: #E3C48F; }
+    .grain::after { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0.06; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+    .btn { transition: background 0.2s; }
+    .btn:hover { background: #E3C48F !important; }
+    .navlink { transition: color 0.2s; }
+    .navlink:hover { color: #F5F1EA !important; }
+    .tab { transition: color 0.2s, border-color 0.2s; cursor: pointer; }
+    .tab:hover { color: #F5F1EA !important; }
+    .dish { transition: background 0.2s; }
+    .dish:hover { background: rgba(201,160,99,0.05); }
+  </style>
+<style>
+
+  :root { --gutter: clamp(20px, 5vw, 100px); --brass: #C9A063; }
+  html { scroll-behavior: smooth; }
+  body { overflow-x: clip; }
+  [id] { scroll-margin-top: 104px; }
+  [style*="flex: 1 1 auto"] { min-width: 0; }
+
+  /* !important porque os artboards trazem position/z-index no atributo style. */
+  .site-header { position: sticky !important; top: 0 !important; z-index: 60 !important; transition: padding .35s ease, background-color .35s ease, border-color .35s ease; }
+  .site-header.is-stuck { padding-top: 10px !important; padding-bottom: 10px !important; background: rgba(10,9,8,0.88); backdrop-filter: blur(14px) saturate(120%); -webkit-backdrop-filter: blur(14px) saturate(120%); border-bottom-color: rgba(245,241,234,0.14) !important; }
+  .logo-link { transition: opacity .25s ease; }
+  .logo-link:hover { opacity: .8; }
+
+  .site-nav { position: relative; }
+  .nav-ink { position: absolute; top: 0; left: 0; height: 2px; width: 0; background: var(--brass); border-radius: 2px; opacity: 0; pointer-events: none; transition: transform .45s cubic-bezier(.22,.61,.36,1), width .45s cubic-bezier(.22,.61,.36,1), opacity .3s ease; }
+  .navlink, .nav-back { transition: color .25s ease; }
+  .nav-back svg { transition: transform .25s ease; }
+  .nav-back:hover svg { transform: translateX(-3px); }
+
+  /* A transição só entra depois que o estado inicial já foi aplicado (.anim),
+     senão o bloco aparece e desaparece antes de entrar em cena. */
+  .reveal { opacity: 0; transform: translateY(20px); }
+  .reveal.anim { transition: opacity .8s cubic-bezier(.22,.61,.36,1), transform .8s cubic-bezier(.22,.61,.36,1); }
+  .reveal.is-in { opacity: 1; transform: none; }
+
+  .ghost svg { transition: transform .25s ease; }
+  .ghost:hover svg { transform: translateX(3px); }
+  .marq:hover { animation-play-state: paused; }
+  [data-panel] { transition: opacity .35s ease; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal, .reveal.is-in { opacity: 1; transform: none; transition: none; }
+    .marq { animation: none; }
+    .site-header { transition: none; }
+  }
+
+  /* Em telas largas a página para de esticar e fica centralizada. */
+  body > div { max-width: 1560px; margin: 0 auto; }
+</style>
+</head>
+<body>
+<div style="width: 100%; overflow-x: clip">
+
+  <header class="site-header" style="display: flex; align-items: center; justify-content: space-between; padding: 18px var(--gutter); border-bottom: 1px solid rgba(245,241,234,0.08); flex-wrap: wrap">
+    <a href="index.html" class="logo-link" style="display: block; flex: 0 0 auto"><div style="position: relative; width: 124px; height: 70px; flex: 0 0 auto">
+      <svg width="124" height="70" viewBox="0 0 124 70" fill="none" style="position: absolute; inset: 0">
+        <ellipse cx="62" cy="35" rx="34" ry="32.5" stroke="#F5F1EA" stroke-width="2" opacity="0.9"></ellipse>
+      </svg>
+      <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center">
+        <span style="font-family: 'Caveat Brush', 'Segoe Script', 'Brush Script MT', cursive; font-size: 32px; line-height: 0.85; color: #F5F1EA">Gastr&ocirc;</span>
+        <span style="font-family: 'Caveat Brush', 'Segoe Script', 'Brush Script MT', cursive; font-size: 20px; line-height: 1; color: #F5F1EA; margin-left: 42px; margin-top: 3px">Hub</span>
+      </div>
+    </div></a>
+    <nav class="site-nav" style="display: flex; align-items: center; gap: 34px; font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; flex-wrap: wrap">
+      <a class="navlink" href="index.html#hub" style="color: #9C948A">O Hub</a>
+      <a class="navlink" href="#cardapio" style="color: #F5F1EA">Card&aacute;pio</a>
+      <a class="navlink" href="eventos.html" style="color: #9C948A">Eventos</a>
+      <a class="navlink" href="index.html#visite" style="color: #9C948A">Visite</a>
+      <span class="nav-ink" aria-hidden="true"></span>
+    </nav>
+    <a class="btn" href="https://wa.me/553125275858" style="display: inline-flex; align-items: center; gap: 9px; background: #C9A063; color: #0A0908; padding: 14px 22px; border-radius: 2px; font-size: 13px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 11.6a8.2 8.2 0 0 1-12 7.3L3.5 20.5l1.7-4.9a8.2 8.2 0 1 1 15.3-4Z"></path><path d="M8.6 12h.01M12 12h.01M15.4 12h.01"></path></svg>
+      Reservar mesa
+    </a>
+  </header>
+
+  <section class="grain" style="position: relative; padding: 88px var(--gutter) 60px; background: radial-gradient(90% 120% at 85% 0%, rgba(201,160,99,0.14) 0%, rgba(10,9,8,0) 60%), #0A0908; overflow: hidden">
+    <div style="position: relative; z-index: 2; display: flex; flex-direction: column; gap: 22px; max-width: 800px">
+      <span style="font-size: 12px; letter-spacing: 0.26em; text-transform: uppercase; color: #C9A063">Card&aacute;pio</span>
+      <h1 style="font-size: clamp(36px, 5.00vw, 72px); line-height: 1; letter-spacing: -0.015em">Escolha a cozinha.<br><em style="color: #C9A063; font-style: italic">Ou n&atilde;o escolha.</em></h1>
+      <p style="font-size: 19px; line-height: 1.62; color: #A69D92; max-width: 620px">Os quatro card&aacute;pios chegam &agrave; mesma mesa. Pe&ccedil;a entrada no Umai, principal no Galeto It&aacute;lia e sobremesa onde der vontade &mdash; tudo em uma comanda.</p>
+    </div>
+  </section>
+
+  <div style="padding: 0 var(--gutter); border-bottom: 1px solid rgba(245,241,234,0.12)">
+      <div style="display: flex; gap: 8px; flex-wrap: wrap">
+        <div class="tab" data-tab="italia" style="display: flex; flex-direction: column; gap: 5px; padding: 22px 30px 20px; border-bottom: 2px solid #C9A063; color: #F5F1EA">
+          <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 26px; line-height: 1.1">Galeto Itália</span>
+          <span style="font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.7">Itália</span>
+        </div>
+        <div class="tab" data-tab="china" style="display: flex; flex-direction: column; gap: 5px; padding: 22px 30px 20px; border-bottom: 2px solid transparent; color: #7E766C">
+          <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 26px; line-height: 1.1">Jin Lon</span>
+          <span style="font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.7">China</span>
+        </div>
+        <div class="tab" data-tab="japao" style="display: flex; flex-direction: column; gap: 5px; padding: 22px 30px 20px; border-bottom: 2px solid transparent; color: #7E766C">
+          <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 26px; line-height: 1.1">Umai</span>
+          <span style="font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.7">Japão</span>
+        </div>
+        <div class="tab" data-tab="brasil" style="display: flex; flex-direction: column; gap: 5px; padding: 22px 30px 20px; border-bottom: 2px solid transparent; color: #7E766C">
+          <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 26px; line-height: 1.1">Bón</span>
+          <span style="font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.7">Brasil</span>
+        </div>
+      </div>
+    </div>
+
+  <section id="cardapio" style="padding: 66px var(--gutter) 92px">
+
+    <div data-panel="italia" style="display: flex; gap: 88px; align-items: flex-start; flex-wrap: wrap">
+      <div style="flex: 1 1 340px; min-width: min(100%, 260px); max-width: 100%; display: flex; flex-direction: column; gap: 20px">
+        <h2 style="font-size: clamp(24px, 3.19vw, 46px); line-height: 1.06">Galeto Itália</h2>
+        <p style="font-size: 17px; line-height: 1.7; color: #9C948A">A casa italiana do Hub. Massas, risotos e o galeto desossado grelhado que dá nome ao restaurante.</p>
+        <div style="height: 1px; background: rgba(245,241,234,0.12); margin: 6px 0"></div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <span style="font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: #7E766C">Ticket médio no Gastrô Hub</span>
+          <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 30px; color: #F5F1EA">R$ 80 a R$ 180</span>
+          <span style="font-size: 14px; color: #7E766C">por pessoa — confirmar antes de publicar</span>
+        </div>
+      </div>
+      <div style="flex: 1 1 auto; display: flex; flex-direction: column">
+        <div class="dish" style="display: flex; align-items: baseline; gap: 22px; padding: 24px 18px; border-bottom: 1px solid rgba(245,241,234,0.10); flex-wrap: wrap">
+          <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 15px; color: #C9A063; width: 30px; flex: 0 0 auto; opacity: 0.8">01</span>
+          <div style="display: flex; flex-direction: column; gap: 6px; flex: 1 1 auto">
+            <span style="font-size: 22px; line-height: 1.25; color: #F5F1EA">Lasanha gratinada</span>
+            <span style="font-size: 15px; line-height: 1.6; color: #7E766C">Clássico da casa.</span>
+          </div>
+        </div>
+        <div class="dish" style="display: flex; align-items: baseline; gap: 22px; padding: 24px 18px; border-bottom: 1px solid rgba(245,241,234,0.10); flex-wrap: wrap">
+          <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 15px; color: #C9A063; width: 30px; flex: 0 0 auto; opacity: 0.8">02</span>
+          <div style="display: flex; flex-direction: column; gap: 6px; flex: 1 1 auto">
+            <span style="font-size: 22px; line-height: 1.25; color: #F5F1EA">Risoto de camarão ao pomodoro</span>
+            <span style="font-size: 15px; line-height: 1.6; color: #7E766C">Com manjericão fresco.</span>
+          </div>
+        </div>
+        <div class="dish" style="display: flex; align-items: baseline; gap: 22px; padding: 24px 18px; border-bottom: 1px solid rgba(245,241,234,0.10); flex-wrap: wrap">
+          <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 15px; color: #C9A063; width: 30px; flex: 0 0 auto; opacity: 0.8">03</span>
+          <div style="display: flex; flex-direction: column; gap: 6px; flex: 1 1 auto">
+            <span style="font-size: 22px; line-height: 1.25; color: #F5F1EA">Galeto desossado grelhado</span>
+            <span style="font-size: 15px; line-height: 1.6; color: #7E766C">O prato que dá nome à casa.</span>
+          </div>
+        </div>
+        <div class="dish" style="display: flex; align-items: baseline; gap: 22px; padding: 24px 18px; border-bottom: 1px solid rgba(245,241,234,0.10); flex-wrap: wrap">
+          <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 15px; color: #C9A063; width: 30px; flex: 0 0 auto; opacity: 0.8">04</span>
+          <div style="display: flex; flex-direction: column; gap: 6px; flex: 1 1 auto">
+            <span style="font-size: 22px; line-height: 1.25; color: #6F6860">[Mais um prato do Galeto Itália]</span>
+            <span style="font-size: 15px; line-height: 1.6; color: #7E766C">[descrição do prato]</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div data-panel="china" style="display: none; gap: 88px; align-items: flex-start">
+      <div style="flex: 1 1 340px; min-width: min(100%, 260px); max-width: 100%; display: flex; flex-direction: column; gap: 20px">
+        <h2 style="font-size: clamp(24px, 3.19vw, 46px); line-height: 1.06">Jin Lon</h2>
+        <p style="font-size: 17px; line-height: 1.7; color: #9C948A">Cozinha chinesa no wok, com massa artesanal preparada na casa.</p>
+        <div style="height: 1px; background: rgba(245,241,234,0.12); margin: 6px 0"></div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <span style="font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: #7E766C">Ticket médio no Gastrô Hub</span>
+          <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 30px; color: #F5F1EA">R$ 80 a R$ 180</span>
+          <span style="font-size: 14px; color: #7E766C">por pessoa — confirmar antes de publicar</span>
+        </div>
+      </div>
+      <div style="flex: 1 1 auto; display: flex; flex-direction: column">
+        <div class="dish" style="display: flex; align-items: baseline; gap: 22px; padding: 24px 18px; border-bottom: 1px solid rgba(245,241,234,0.10); flex-wrap: wrap">
+          <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 15px; color: #C9A063; width: 30px; flex: 0 0 auto; opacity: 0.8">01</span>
+          <div style="display: flex; flex-direction: column; gap: 6px; flex: 1 1 auto">
+            <span style="font-size: 22px; line-height: 1.25; color: #F5F1EA">Talharim chop suey artesanal</span>
+            <span style="font-size: 15px; line-height: 1.6; color: #7E766C">Massa da casa com carne, porco, acelga e cenoura.</span>
+          </div>
+        </div>
+        <div class="dish" style="display: flex; align-items: baseline; gap: 22px; padding: 24px 18px; border-bottom: 1px solid rgba(245,241,234,0.10); flex-wrap: wrap">
+          <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 15px; color: #C9A063; width: 30px; flex: 0 0 auto; opacity: 0.8">02</span>
+          <div style="display: flex; flex-direction: column; gap: 6px; flex: 1 1 auto">
+            <span style="font-size: 22px; line-height: 1.25; color: #F5F1EA">Lombo agridoce</span>
+            <span style="font-size: 15px; line-height: 1.6; color: #7E766C">[acompanhamento e ponto do prato]</span>
+          </div>
+        </div>
+        <div class="dish" style="display: flex; align-items: baseline; gap: 22px; padding: 24px 18px; border-bottom: 1px solid rgba(245,241,234,0.10); flex-wrap: wrap">
+          <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 15px; color: #C9A063; width: 30px; flex: 0 0 auto; opacity: 0.8">03</span>
+          <div style="display: flex; flex-direction: column; gap: 6px; flex: 1 1 auto">
+            <span style="font-size: 22px; line-height: 1.25; color: #F5F1EA">Camarão imperador flambado</span>
+            <span style="font-size: 15px; line-height: 1.6; color: #7E766C">Ao molho curry.</span>
+          </div>
+        </div>
+        <div class="dish" style="display: flex; align-items: baseline; gap: 22px; padding: 24px 18px; border-bottom: 1px solid rgba(245,241,234,0.10); flex-wrap: wrap">
+          <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 15px; color: #C9A063; width: 30px; flex: 0 0 auto; opacity: 0.8">04</span>
+          <div style="display: flex; flex-direction: column; gap: 6px; flex: 1 1 auto">
+            <span style="font-size: 22px; line-height: 1.25; color: #6F6860">[Mais um prato do Jin Lon]</span>
+            <span style="font-size: 15px; line-height: 1.6; color: #7E766C">[descrição do prato]</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div data-panel="japao" style="display: none; gap: 88px; align-items: flex-start">
+      <div style="flex: 1 1 340px; min-width: min(100%, 260px); max-width: 100%; display: flex; flex-direction: column; gap: 20px">
+        <h2 style="font-size: clamp(24px, 3.19vw, 46px); line-height: 1.06">Umai</h2>
+        <p style="font-size: 17px; line-height: 1.7; color: #9C948A">Sushi, sashimi e temaki preparados na hora.</p>
+        <div style="height: 1px; background: rgba(245,241,234,0.12); margin: 6px 0"></div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <span style="font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: #7E766C">Ticket médio no Gastrô Hub</span>
+          <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 30px; color: #F5F1EA">R$ 80 a R$ 180</span>
+          <span style="font-size: 14px; color: #7E766C">por pessoa — confirmar antes de publicar</span>
+        </div>
+      </div>
+      <div style="flex: 1 1 auto; display: flex; flex-direction: column">
+        <div class="dish" style="display: flex; align-items: baseline; gap: 22px; padding: 24px 18px; border-bottom: 1px solid rgba(245,241,234,0.10); flex-wrap: wrap">
+          <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 15px; color: #C9A063; width: 30px; flex: 0 0 auto; opacity: 0.8">01</span>
+          <div style="display: flex; flex-direction: column; gap: 6px; flex: 1 1 auto">
+            <span style="font-size: 22px; line-height: 1.25; color: #6F6860">[Combinado assinatura do Umai]</span>
+            <span style="font-size: 15px; line-height: 1.6; color: #7E766C">Nome + o que vem no combinado.</span>
+          </div>
+        </div>
+        <div class="dish" style="display: flex; align-items: baseline; gap: 22px; padding: 24px 18px; border-bottom: 1px solid rgba(245,241,234,0.10); flex-wrap: wrap">
+          <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 15px; color: #C9A063; width: 30px; flex: 0 0 auto; opacity: 0.8">02</span>
+          <div style="display: flex; flex-direction: column; gap: 6px; flex: 1 1 auto">
+            <span style="font-size: 22px; line-height: 1.25; color: #6F6860">[Prato quente do Umai]</span>
+            <span style="font-size: 15px; line-height: 1.6; color: #7E766C">Um yakisoba, um teppan, o que for da casa.</span>
+          </div>
+        </div>
+        <div class="dish" style="display: flex; align-items: baseline; gap: 22px; padding: 24px 18px; border-bottom: 1px solid rgba(245,241,234,0.10); flex-wrap: wrap">
+          <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 15px; color: #C9A063; width: 30px; flex: 0 0 auto; opacity: 0.8">03</span>
+          <div style="display: flex; flex-direction: column; gap: 6px; flex: 1 1 auto">
+            <span style="font-size: 22px; line-height: 1.25; color: #6F6860">[Temaki ou uramaki da casa]</span>
+            <span style="font-size: 15px; line-height: 1.6; color: #7E766C">O mais pedido do sushi bar.</span>
+          </div>
+        </div>
+        <div class="dish" style="display: flex; align-items: baseline; gap: 22px; padding: 24px 18px; border-bottom: 1px solid rgba(245,241,234,0.10); flex-wrap: wrap">
+          <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 15px; color: #C9A063; width: 30px; flex: 0 0 auto; opacity: 0.8">04</span>
+          <div style="display: flex; flex-direction: column; gap: 6px; flex: 1 1 auto">
+            <span style="font-size: 22px; line-height: 1.25; color: #6F6860">[Entrada japonesa]</span>
+            <span style="font-size: 15px; line-height: 1.6; color: #7E766C">Guioza, sunomono, o que estiver no cardápio.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div data-panel="brasil" style="display: none; gap: 88px; align-items: flex-start">
+      <div style="flex: 1 1 340px; min-width: min(100%, 260px); max-width: 100%; display: flex; flex-direction: column; gap: 20px">
+        <h2 style="font-size: clamp(24px, 3.19vw, 46px); line-height: 1.06">Bón</h2>
+        <p style="font-size: 17px; line-height: 1.7; color: #9C948A">Cozinha brasileira contemporânea, para a mesa que quer o de sempre bem feito.</p>
+        <div style="height: 1px; background: rgba(245,241,234,0.12); margin: 6px 0"></div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <span style="font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: #7E766C">Ticket médio no Gastrô Hub</span>
+          <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 30px; color: #F5F1EA">R$ 80 a R$ 180</span>
+          <span style="font-size: 14px; color: #7E766C">por pessoa — confirmar antes de publicar</span>
+        </div>
+      </div>
+      <div style="flex: 1 1 auto; display: flex; flex-direction: column">
+        <div class="dish" style="display: flex; align-items: baseline; gap: 22px; padding: 24px 18px; border-bottom: 1px solid rgba(245,241,234,0.10); flex-wrap: wrap">
+          <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 15px; color: #C9A063; width: 30px; flex: 0 0 auto; opacity: 0.8">01</span>
+          <div style="display: flex; flex-direction: column; gap: 6px; flex: 1 1 auto">
+            <span style="font-size: 22px; line-height: 1.25; color: #6F6860">[Carne assinatura do Bón]</span>
+            <span style="font-size: 15px; line-height: 1.6; color: #7E766C">O corte que a casa mais vende.</span>
+          </div>
+        </div>
+        <div class="dish" style="display: flex; align-items: baseline; gap: 22px; padding: 24px 18px; border-bottom: 1px solid rgba(245,241,234,0.10); flex-wrap: wrap">
+          <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 15px; color: #C9A063; width: 30px; flex: 0 0 auto; opacity: 0.8">02</span>
+          <div style="display: flex; flex-direction: column; gap: 6px; flex: 1 1 auto">
+            <span style="font-size: 22px; line-height: 1.25; color: #6F6860">[Prato de peixe ou frutos do mar]</span>
+            <span style="font-size: 15px; line-height: 1.6; color: #7E766C">Com a guarnição que acompanha.</span>
+          </div>
+        </div>
+        <div class="dish" style="display: flex; align-items: baseline; gap: 22px; padding: 24px 18px; border-bottom: 1px solid rgba(245,241,234,0.10); flex-wrap: wrap">
+          <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 15px; color: #C9A063; width: 30px; flex: 0 0 auto; opacity: 0.8">03</span>
+          <div style="display: flex; flex-direction: column; gap: 6px; flex: 1 1 auto">
+            <span style="font-size: 22px; line-height: 1.25; color: #6F6860">[Opção para dividir]</span>
+            <span style="font-size: 15px; line-height: 1.6; color: #7E766C">Prato para duas pessoas, se houver.</span>
+          </div>
+        </div>
+        <div class="dish" style="display: flex; align-items: baseline; gap: 22px; padding: 24px 18px; border-bottom: 1px solid rgba(245,241,234,0.10); flex-wrap: wrap">
+          <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 15px; color: #C9A063; width: 30px; flex: 0 0 auto; opacity: 0.8">04</span>
+          <div style="display: flex; flex-direction: column; gap: 6px; flex: 1 1 auto">
+            <span style="font-size: 22px; line-height: 1.25; color: #6F6860">[Sobremesa da casa]</span>
+            <span style="font-size: 15px; line-height: 1.6; color: #7E766C">[nome da sobremesa da casa]</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="border-top: 1px solid rgba(245,241,234,0.10); border-bottom: 1px solid rgba(245,241,234,0.10); background: #0D0B09; padding: 66px var(--gutter); display: flex; flex-direction: column; gap: 30px">
+    <div style="display: flex; align-items: baseline; gap: 20px; flex-wrap: wrap">
+      <h2 style="font-size: clamp(24px, 2.36vw, 34px); line-height: 1.1">Os mais citados nas avalia&ccedil;&otilde;es</h2>
+      <span style="font-size: 14px; color: #7E766C">o que os clientes mais mencionam por nome no Google</span>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; gap: 12px">
+      <span style="border: 1px solid rgba(245,241,234,0.16); padding: 12px 22px; border-radius: 2px; font-size: 16px; color: #CFC7BB">Burrata</span>
+      <span style="border: 1px solid rgba(245,241,234,0.16); padding: 12px 22px; border-radius: 2px; font-size: 16px; color: #CFC7BB">Fil&eacute; mignon</span>
+      <span style="border: 1px solid rgba(245,241,234,0.16); padding: 12px 22px; border-radius: 2px; font-size: 16px; color: #CFC7BB">Polvo</span>
+      <span style="border: 1px solid rgba(245,241,234,0.16); padding: 12px 22px; border-radius: 2px; font-size: 16px; color: #CFC7BB">Risoto de camar&atilde;o</span>
+      <span style="border: 1px solid rgba(245,241,234,0.16); padding: 12px 22px; border-radius: 2px; font-size: 16px; color: #CFC7BB">Bife Denver</span>
+      <span style="border: 1px solid rgba(245,241,234,0.16); padding: 12px 22px; border-radius: 2px; font-size: 16px; color: #CFC7BB">Rolinho primavera</span>
+      <span style="border: 1px solid rgba(245,241,234,0.16); padding: 12px 22px; border-radius: 2px; font-size: 16px; color: #CFC7BB">Tiramis&ugrave;</span>
+      <span style="border: 1px solid rgba(245,241,234,0.16); padding: 12px 22px; border-radius: 2px; font-size: 16px; color: #CFC7BB">Petit gateau</span>
+    </div>
+  </section>
+
+  <section id="reservar" style="padding: 96px var(--gutter); display: flex; align-items: center; justify-content: space-between; gap: 60px; flex-wrap: wrap">
+    <div style="display: flex; flex-direction: column; gap: 16px; max-width: 620px">
+      <h2 style="font-size: clamp(25px, 3.47vw, 50px); line-height: 1.06">Card&aacute;pio completo e sugest&otilde;es do dia</h2>
+      <p style="font-size: 18px; line-height: 1.6; color: #A69D92">Manda uma mensagem que enviamos o card&aacute;pio atualizado das quatro cozinhas e j&aacute; deixamos sua mesa reservada.</p>
+    </div>
+    <a class="btn" href="https://wa.me/553125275858" style="flex: 0 0 auto; display: inline-flex; align-items: center; gap: 12px; background: #C9A063; color: #0A0908; padding: 22px 40px; border-radius: 2px; font-size: 17px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 11.6a8.2 8.2 0 0 1-12 7.3L3.5 20.5l1.7-4.9a8.2 8.2 0 1 1 15.3-4Z"></path><path d="M8.6 12h.01M12 12h.01M15.4 12h.01"></path></svg>
+      Falar no WhatsApp
+    </a>
+  </section>
+
+  <footer style="border-top: 1px solid rgba(245,241,234,0.10); padding: 46px var(--gutter); display: flex; justify-content: space-between; align-items: center; background: #0A0908; flex-wrap: wrap">
+    <span style="font-size: 14px; color: #7E766C">Av. do Contorno, 4667 &mdash; Serra, Belo Horizonte/MG &middot; (31) 2527-5858</span>
+    <span style="font-size: 13px; color: #6F6860">&copy; 2026 Gastr&ocirc; Hub</span>
+  </footer>
+
+</div>
+
+<script>
+  document.querySelectorAll('[data-tab]').forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      var id = tab.getAttribute('data-tab');
+      document.querySelectorAll('[data-tab]').forEach(function (t) {
+        var on = t === tab;
+        t.style.borderBottomColor = on ? '#C9A063' : 'transparent';
+        t.style.color = on ? '#F5F1EA' : '#7E766C';
+      });
+      document.querySelectorAll('[data-panel]').forEach(function (p) {
+        if (p.getAttribute('data-panel') !== id) { p.style.display = 'none'; return; }
+        p.classList.remove('reveal', 'anim');
+        p.classList.add('is-in');
+        p.style.display = 'flex';
+        // Estado inicial aplicado de forma síncrona, sem depender de rAF.
+        p.style.transition = 'none';
+        p.style.opacity = '0';
+        void p.offsetWidth;
+        p.style.transition = '';
+        p.style.opacity = '1';
+        // E o painel fica visível mesmo que a transição não chegue a rodar.
+        clearTimeout(p._settle);
+        p._settle = setTimeout(function () { p.style.transition = 'none'; p.style.opacity = ''; }, 600);
+      });
+    });
+  });
+</script>
+<script>
+(function () {
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var page = location.pathname.split('/').pop() || 'index.html';
+
+  /* cabeçalho condensa ao rolar */
+  var header = document.querySelector('.site-header');
+  if (header) {
+    var stick = function () { header.classList.toggle('is-stuck', window.scrollY > 60); };
+    addEventListener('scroll', stick, { passive: true });
+    stick();
+  }
+
+  /* barrinha dourada que desliza entre os itens do menu */
+  var nav = document.querySelector('.site-nav');
+  if (nav) {
+    var ink = nav.querySelector('.nav-ink');
+    var links = [].slice.call(nav.querySelectorAll('a[href]')).filter(function (a) {
+      return !a.hasAttribute('data-nav-skip');
+    });
+    var active = null;
+
+    var place = function (link, animate) {
+      if (!link || !ink) return;
+      if (!animate) ink.style.transition = 'none';
+      ink.style.width = link.offsetWidth + 'px';
+      ink.style.transform = 'translate(' + link.offsetLeft + 'px,' + (link.offsetTop + link.offsetHeight + 9) + 'px)';
+      ink.style.opacity = '1';
+      if (!animate) { void ink.offsetWidth; ink.style.transition = ''; }
+    };
+    var setActive = function (link, animate) {
+      if (!link) return;
+      active = link;
+      links.forEach(function (a) { a.style.color = (a === link) ? '#F5F1EA' : '#9C948A'; });
+      place(link, animate !== false);
+    };
+    var spyOf = function (a) {
+      var s = a.getAttribute('data-spy');
+      if (s) return s;
+      var h = a.getAttribute('href') || '';
+      return h.charAt(0) === '#' ? h : null;
+    };
+
+    var sections = [];
+    links.forEach(function (a) {
+      var sel = spyOf(a);
+      var el = sel ? document.querySelector(sel) : null;
+      if (el) sections.push({ link: a, el: el });
+    });
+    var current = links.filter(function (a) { return (a.getAttribute('href') || '') === page; })[0];
+
+    setActive(current || (sections[0] && sections[0].link) || links[0], false);
+
+    links.forEach(function (a) {
+      a.addEventListener('mouseenter', function () { place(a, true); });
+      a.addEventListener('click', function () { setActive(a); });
+    });
+    nav.addEventListener('mouseleave', function () { place(active, true); });
+    addEventListener('resize', function () { place(active, false); });
+
+    if (!current && sections.length) {
+      var spy = function () {
+        var mark = innerHeight * 0.3, best = null;
+        sections.forEach(function (s) {
+          var r = s.el.getBoundingClientRect();
+          if (r.top <= mark && r.bottom > mark) best = s;
+        });
+        if (!best) {
+          best = sections[0].el.getBoundingClientRect().top > mark ? sections[0] : sections[sections.length - 1];
+        }
+        if (best && best.link !== active) setActive(best.link);
+      };
+      addEventListener('scroll', spy, { passive: true });
+      spy();
+    }
+  }
+
+  /* blocos entram com um fade curto ao aparecer */
+  if (!reduce && 'IntersectionObserver' in window) {
+    var items = [];
+    [].forEach.call(document.querySelectorAll('section, footer'), function (sec) {
+      var group = [];
+      [].forEach.call(sec.children, function (child) {
+        var cs = getComputedStyle(child);
+        if (cs.position === 'absolute' || cs.display === 'none') return;
+        if (cs.display === 'grid' && child.children.length > 1) {
+          [].forEach.call(child.children, function (g) { group.push(g); });
+        } else {
+          group.push(child);
+        }
+      });
+      group.forEach(function (el, i) {
+        el.classList.add('reveal');
+        el.style.transitionDelay = Math.min(i * 70, 350) + 'ms';
+        items.push(el);
+      });
+    });
+    void document.body.offsetHeight;
+    items.forEach(function (el) { el.classList.add('anim'); });
+
+    /* Depois de entrar, o bloco larga as classes de animação: assim a
+       visibilidade final não depende da transição ter conseguido rodar. */
+    var settle = function (el) {
+      setTimeout(function () {
+        el.classList.remove('reveal', 'anim', 'is-in');
+        el.style.transitionDelay = '';
+      }, 1300);
+    };
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('is-in');
+        io.unobserve(e.target);
+        settle(e.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    items.forEach(function (el) { io.observe(el); });
+
+    /* Rede de segurança: se o observador não responder, o conteúdo aparece
+       do mesmo jeito. Conteúdo invisível é pior que animação perdida. */
+    setTimeout(function () {
+      if (!document.querySelector('.reveal.is-in')) {
+        items.forEach(function (el) { el.classList.add('is-in'); settle(el); });
+      }
+    }, 1400);
+  }
+
+  /* números sobem de zero até o valor */
+  var counters = document.querySelectorAll('[data-count]');
+  if (counters.length && !reduce && 'IntersectionObserver' in window) {
+    var run = function (el) {
+      var raw = el.textContent.trim();
+      if (/ a /.test(raw)) return;
+      var m = raw.match(/^([0-9.,]+)(.*)$/);
+      if (!m) return;
+      var digits = m[1], suffix = m[2];
+      var decimals = (digits.split(',')[1] || '').length;
+      var grouped = digits.indexOf('.') > -1;
+      var target = parseFloat(digits.replace(/\./g, '').replace(',', '.'));
+      if (!isFinite(target)) return;
+      var fmt = function (v) {
+        var s = decimals ? v.toFixed(decimals).replace('.', ',') : String(Math.round(v));
+        if (grouped) s = s.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        return s + suffix;
+      };
+      var t0 = null;
+      var step = function (now) {
+        if (t0 === null) t0 = now;
+        var p = Math.min((now - t0) / 1200, 1);
+        el.textContent = fmt(target * (1 - Math.pow(1 - p, 3)));
+        if (p < 1) requestAnimationFrame(step); else el.textContent = raw;
+      };
+      el.textContent = fmt(0);
+      requestAnimationFrame(step);
+    };
+    var cio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { run(e.target); cio.unobserve(e.target); }
+      });
+    }, { threshold: 0.4 });
+    [].forEach.call(counters, function (el) { cio.observe(el); });
+  }
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,300 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@300;400;500;600&family=Caveat+Brush&display=swap">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #0A0908; color: #F5F1EA; font-family: 'Jost', 'Century Gothic', 'Futura', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    h1, h2, h3 { font-family: 'Bodoni Moda', Didot, 'Bodoni MT', Georgia, serif; font-weight: 400; margin: 0; text-wrap: balance; }
+    p { margin: 0; text-wrap: pretty; }
+    a { color: #C9A063; text-decoration: none; }
+    a:hover { color: #E3C48F; }
+    .grain::after { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0.06; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+    @keyframes halo { 0%, 100% { opacity: 0.45; } 50% { opacity: 0.8; } }
+    .halo { animation: halo 12s ease-in-out infinite; }
+    .btn { transition: background 0.2s; }
+    .btn:hover { background: #E3C48F !important; }
+    .ghost { transition: border-color 0.2s; }
+    .ghost:hover { border-color: rgba(245,241,234,0.55) !important; }
+    .card { transition: border-color 0.25s, transform 0.25s; }
+    .card:hover { border-color: rgba(201,160,99,0.5) !important; transform: translateY(-3px); }
+    .navlink { transition: color 0.2s; }
+    .navlink:hover { color: #F5F1EA !important; }
+    input, select, textarea { font-family: 'Jost', 'Century Gothic', system-ui, sans-serif; font-size: 16px; color: #F5F1EA; background: #0A0908; border: 1px solid rgba(245,241,234,0.18); border-radius: 2px; padding: 15px 16px; width: 100%; outline: none; transition: border-color 0.2s; }
+    input:focus, select:focus, textarea:focus { border-color: #C9A063; }
+    input::placeholder, textarea::placeholder { color: #6F6860; }
+    label { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: #9C948A; }
+  </style>
+</helmet>
+
+<div style="width: 100%; overflow: hidden">
+
+  <header style="position: relative; z-index: 5; display: flex; align-items: center; justify-content: space-between; padding: 18px 100px; border-bottom: 1px solid rgba(245,241,234,0.08)">
+    <div style="position: relative; width: 124px; height: 70px; flex: 0 0 auto">
+      <svg width="124" height="70" viewBox="0 0 124 70" fill="none" style="position: absolute; inset: 0">
+        <ellipse cx="62" cy="35" rx="34" ry="32.5" stroke="#F5F1EA" stroke-width="2" opacity="0.9"></ellipse>
+      </svg>
+      <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center">
+        <span style="font-family: 'Caveat Brush', 'Segoe Script', 'Brush Script MT', cursive; font-size: 32px; line-height: 0.85; color: #F5F1EA">Gastr&ocirc;</span>
+        <span style="font-family: 'Caveat Brush', 'Segoe Script', 'Brush Script MT', cursive; font-size: 20px; line-height: 1; color: #F5F1EA; margin-left: 42px; margin-top: 3px">Hub</span>
+      </div>
+    </div>
+    <nav style="display: flex; align-items: center; gap: 34px; font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase">
+      <a class="nav-back" data-nav-skip="true" href="#voltar" style="display: inline-flex; align-items: center; gap: 8px; color: #C9A063">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12H5M11 18l-6-6 6-6"></path></svg>
+        Restaurante
+      </a>
+      <span aria-hidden="true" style="width: 1px; height: 14px; background: rgba(245,241,234,0.20); flex: 0 0 auto"></span>
+      <a class="navlink" href="#espaco" style="color: #9C948A">O espa&ccedil;o</a>
+      <a class="navlink" href="#modelos" style="color: #9C948A">Modelos</a>
+      <a class="navlink" href="#ocasioes" style="color: #9C948A">Ocasi&otilde;es</a>
+      <a class="navlink" href="#orcamento" style="color: #9C948A">Or&ccedil;amento</a>
+    </nav>
+    <a class="btn" href="#orcamento" style="display: inline-flex; align-items: center; gap: 9px; background: #C9A063; color: #0A0908; padding: 14px 22px; border-radius: 2px; font-size: 13px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase">
+      Pedir or&ccedil;amento
+    </a>
+  </header>
+
+  <section class="grain" style="position: relative; padding: 96px 100px 88px; background: radial-gradient(110% 100% at 88% 100%, rgba(201,160,99,0.22) 0%, rgba(201,160,99,0) 55%), linear-gradient(180deg, #0E0C0A 0%, #0A0908 100%); overflow: hidden">
+    <div class="halo" style="position: absolute; right: -200px; bottom: -260px; width: 680px; height: 680px; border-radius: 50%; background: radial-gradient(circle, rgba(201,160,99,0.26) 0%, rgba(201,160,99,0) 68%); filter: blur(26px); pointer-events: none"></div>
+    <div style="position: relative; z-index: 2; display: flex; flex-direction: column; gap: 28px; max-width: 900px">
+      <span style="font-size: 12px; letter-spacing: 0.26em; text-transform: uppercase; color: #C9A063">Espa&ccedil;o de eventos &middot; Av. do Contorno, 4667</span>
+      <h1 style="font-size: 84px; line-height: 0.99; letter-spacing: -0.015em">170 m&sup2; s&oacute; seus, com<br>quatro cozinhas <em style="color: #C9A063; font-style: italic">do lado.</em></h1>
+      <p style="font-size: 20px; line-height: 1.62; color: #A69D92; max-width: 700px">Casamento, anivers&aacute;rio, batizado, confraterniza&ccedil;&atilde;o ou apresenta&ccedil;&atilde;o corporativa para 20 a 70 pessoas &mdash; em um andar com entrada e cozinha independentes do restaurante.</p>
+      <div style="display: flex; align-items: center; gap: 16px; margin-top: 6px">
+        <a class="btn" href="#orcamento" style="display: inline-flex; align-items: center; gap: 11px; background: #C9A063; color: #0A0908; padding: 19px 32px; border-radius: 2px; font-size: 15px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase">
+          Pedir or&ccedil;amento
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"></path></svg>
+        </a>
+        <a class="ghost" href="#whatsapp" style="display: inline-flex; align-items: center; gap: 10px; border: 1px solid rgba(245,241,234,0.25); color: #F5F1EA; padding: 18px 28px; border-radius: 2px; font-size: 15px; letter-spacing: 0.05em">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 11.6a8.2 8.2 0 0 1-12 7.3L3.5 20.5l1.7-4.9a8.2 8.2 0 1 1 15.3-4Z"></path><path d="M8.6 12h.01M12 12h.01M15.4 12h.01"></path></svg>
+          (31) 2527-5858
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section style="border-top: 1px solid rgba(245,241,234,0.10); border-bottom: 1px solid rgba(245,241,234,0.10); background: #0D0B09; padding: 52px 100px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 40px">
+    <div style="display: flex; flex-direction: column; gap: 8px">
+      <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 50px; line-height: 1">170 m&sup2;</span>
+      <span style="font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: #7E766C">&Aacute;rea exclusiva</span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 8px">
+      <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 50px; line-height: 1">20 a 70</span>
+      <span style="font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: #7E766C">Convidados</span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 8px">
+      <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 50px; line-height: 1">95&Prime;</span>
+      <span style="font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: #7E766C">Tel&atilde;o com projetor</span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 8px">
+      <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 50px; line-height: 1">9</span>
+      <span style="font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: #7E766C">Caixas de som</span>
+    </div>
+  </section>
+
+  <section id="espaco" style="padding: 100px 100px 96px; display: flex; flex-direction: column; gap: 46px">
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 60px">
+      <div style="display: flex; flex-direction: column; gap: 18px; max-width: 640px">
+        <span style="font-size: 12px; letter-spacing: 0.26em; text-transform: uppercase; color: #C9A063">O espa&ccedil;o</span>
+        <h2 style="font-size: 54px; line-height: 1.04">Voc&ecirc; n&atilde;o vai alugar<br>equipamento nenhum.</h2>
+      </div>
+      <p style="font-size: 17px; line-height: 1.75; color: #9C948A; max-width: 380px">Estrutura audiovisual e ilumina&ccedil;&atilde;o j&aacute; instaladas no sal&atilde;o, com projeto do espa&ccedil;o assinado pela arquiteta Andr&eacute;a Buratto.</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px">
+      <div class="card" style="border: 1px solid rgba(245,241,234,0.12); background: linear-gradient(180deg, #100E0C 0%, #0A0908 100%); padding: 34px 30px; display: flex; flex-direction: column; gap: 16px">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C9A063" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="12" rx="1"></rect><path d="M12 16.5V20M8.5 20h7"></path></svg>
+        <h3 style="font-size: 24px; line-height: 1.2">Projetor e tel&atilde;o de 95&Prime;</h3>
+        <p style="font-size: 15px; line-height: 1.68; color: #9C948A">Para retrospectiva de casamento, v&iacute;deo institucional ou apresenta&ccedil;&atilde;o de resultados.</p>
+      </div>
+      <div class="card" style="border: 1px solid rgba(245,241,234,0.12); background: linear-gradient(180deg, #100E0C 0%, #0A0908 100%); padding: 34px 30px; display: flex; flex-direction: column; gap: 16px">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C9A063" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5.5" y="3" width="13" height="18" rx="2"></rect><circle cx="12" cy="14" r="3.2"></circle><circle cx="12" cy="7" r="1.1"></circle></svg>
+        <h3 style="font-size: 24px; line-height: 1.2">Sistema ac&uacute;stico de 9 caixas</h3>
+        <p style="font-size: 15px; line-height: 1.68; color: #9C948A">Nove caixas distribu&iacute;das pelo sal&atilde;o, j&aacute; instaladas &mdash; sem alugar som &agrave; parte.</p>
+      </div>
+      <div class="card" style="border: 1px solid rgba(245,241,234,0.12); background: linear-gradient(180deg, #100E0C 0%, #0A0908 100%); padding: 34px 30px; display: flex; flex-direction: column; gap: 16px">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C9A063" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5.5 12a6.5 6.5 0 0 0 13 0M12 18.5V21"></path></svg>
+        <h3 style="font-size: 24px; line-height: 1.2">Microfone e multim&iacute;dia</h3>
+        <p style="font-size: 15px; line-height: 1.68; color: #9C948A">Para discurso, cerim&ocirc;nia, palestra ou treinamento.</p>
+      </div>
+      <div class="card" style="border: 1px solid rgba(245,241,234,0.12); background: linear-gradient(180deg, #100E0C 0%, #0A0908 100%); padding: 34px 30px; display: flex; flex-direction: column; gap: 16px">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C9A063" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 18.5h5M10.5 21.2h3"></path><path d="M12 3a6 6 0 0 1 3.6 10.8c-.5.4-.8 1-.8 1.6v.6H9.2v-.6c0-.6-.3-1.2-.8-1.6A6 6 0 0 1 12 3Z"></path></svg>
+        <h3 style="font-size: 24px; line-height: 1.2">Ilumina&ccedil;&atilde;o pr&oacute;pria</h3>
+        <p style="font-size: 15px; line-height: 1.68; color: #9C948A">Cena de jantar, cena de festa. A luz muda com o momento do evento.</p>
+      </div>
+      <div class="card" style="border: 1px solid rgba(245,241,234,0.12); background: linear-gradient(180deg, #100E0C 0%, #0A0908 100%); padding: 34px 30px; display: flex; flex-direction: column; gap: 16px">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C9A063" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20.5V9.2l8-5.7 8 5.7v11.3"></path><path d="M4 20.5h16M10 20.5v-6h4v6"></path></svg>
+        <h3 style="font-size: 24px; line-height: 1.2">Entrada independente</h3>
+        <p style="font-size: 15px; line-height: 1.68; color: #9C948A">Seus convidados n&atilde;o atravessam o restaurante. O evento &eacute; privado de verdade.</p>
+      </div>
+      <div class="card" style="border: 1px solid rgba(245,241,234,0.12); background: linear-gradient(180deg, #100E0C 0%, #0A0908 100%); padding: 34px 30px; display: flex; flex-direction: column; gap: 16px">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C9A063" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3.5v7M10.5 3.5v7M8.7 10.5V20.5"></path><path d="M16.5 3.5c-1.5 1.6-2 3.6-2 5.5 0 1.4.7 2.4 2 2.6v8.9"></path></svg>
+        <h3 style="font-size: 24px; line-height: 1.2">Cozinha exclusiva</h3>
+        <p style="font-size: 15px; line-height: 1.68; color: #9C948A">O andar tem cozinha pr&oacute;pria, separada da cozinha do restaurante.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="modelos" style="border-top: 1px solid rgba(245,241,234,0.10); background: #0D0B09; padding: 100px; display: flex; flex-direction: column; gap: 46px">
+    <div style="display: flex; flex-direction: column; gap: 18px; max-width: 700px">
+      <span style="font-size: 12px; letter-spacing: 0.26em; text-transform: uppercase; color: #C9A063">Modelos</span>
+      <h2 style="font-size: 54px; line-height: 1.04">Dois jeitos de fechar o espa&ccedil;o</h2>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px">
+      <div style="border: 1px solid rgba(201,160,99,0.45); background: linear-gradient(180deg, #16110B 0%, #0D0B09 100%); padding: 44px 40px; display: flex; flex-direction: column; gap: 22px">
+        <div style="display: flex; align-items: center; gap: 12px">
+          <span style="font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #0A0908; background: #C9A063; padding: 6px 12px; border-radius: 2px">Completo</span>
+        </div>
+        <h3 style="font-size: 34px; line-height: 1.12">Espa&ccedil;o + gastronomia</h3>
+        <p style="font-size: 16px; line-height: 1.7; color: #A69D92">O evento inteiro com a gente: sal&atilde;o, estrutura, equipe de servi&ccedil;o e o card&aacute;pio das quatro cozinhas do Hub.</p>
+        <div style="display: flex; flex-direction: column; gap: 12px; padding-top: 6px">
+          <div style="display: flex; gap: 12px; align-items: flex-start"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#C9A063" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="flex: 0 0 auto; margin-top: 3px"><path d="M4 12.5l5 5 11-11"></path></svg><span style="font-size: 16px; line-height: 1.5; color: #CFC7BB">Menu montado entre italiana, chinesa, japonesa e brasileira</span></div>
+          <div style="display: flex; gap: 12px; align-items: flex-start"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#C9A063" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="flex: 0 0 auto; margin-top: 3px"><path d="M4 12.5l5 5 11-11"></path></svg><span style="font-size: 16px; line-height: 1.5; color: #CFC7BB">Equipe de sal&atilde;o e cozinha da casa</span></div>
+          <div style="display: flex; gap: 12px; align-items: flex-start"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#C9A063" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="flex: 0 0 auto; margin-top: 3px"><path d="M4 12.5l5 5 11-11"></path></svg><span style="font-size: 16px; line-height: 1.5; color: #CFC7BB">Um fornecedor s&oacute; para resolver o evento</span></div>
+        </div>
+        <a class="btn" href="#orcamento" style="align-self: flex-start; margin-top: auto; display: inline-flex; align-items: center; gap: 10px; background: #C9A063; color: #0A0908; padding: 17px 30px; border-radius: 2px; font-size: 14px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase">Simular esse modelo</a>
+      </div>
+      <div style="border: 1px solid rgba(245,241,234,0.14); background: #100E0C; padding: 44px 40px; display: flex; flex-direction: column; gap: 22px">
+        <div style="display: flex; align-items: center; gap: 12px">
+          <span style="font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #7E766C; border: 1px solid rgba(245,241,234,0.18); padding: 6px 12px; border-radius: 2px">Flex&iacute;vel</span>
+        </div>
+        <h3 style="font-size: 34px; line-height: 1.12">Somente a loca&ccedil;&atilde;o</h3>
+        <p style="font-size: 16px; line-height: 1.7; color: #A69D92">Voc&ecirc; aluga o espa&ccedil;o com toda a estrutura e traz os seus fornecedores de buffet e decora&ccedil;&atilde;o.</p>
+        <div style="display: flex; flex-direction: column; gap: 12px; padding-top: 6px">
+          <div style="display: flex; gap: 12px; align-items: flex-start"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#C9A063" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="flex: 0 0 auto; margin-top: 3px"><path d="M4 12.5l5 5 11-11"></path></svg><span style="font-size: 16px; line-height: 1.5; color: #CFC7BB">Contrata&ccedil;&atilde;o externa permitida</span></div>
+          <div style="display: flex; gap: 12px; align-items: flex-start"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#C9A063" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="flex: 0 0 auto; margin-top: 3px"><path d="M4 12.5l5 5 11-11"></path></svg><span style="font-size: 16px; line-height: 1.5; color: #CFC7BB">[O que entra na loca&ccedil;&atilde;o: audiovisual, ilumina&ccedil;&atilde;o, mobili&aacute;rio]</span></div>
+          <div style="display: flex; gap: 12px; align-items: flex-start"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#C9A063" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="flex: 0 0 auto; margin-top: 3px"><path d="M4 12.5l5 5 11-11"></path></svg><span style="font-size: 16px; line-height: 1.5; color: #CFC7BB">[Regras para o buffet externo usar a cozinha do andar]</span></div>
+        </div>
+        <a class="ghost" href="#orcamento" style="align-self: flex-start; margin-top: auto; display: inline-flex; align-items: center; gap: 10px; border: 1px solid rgba(245,241,234,0.25); color: #F5F1EA; padding: 16px 28px; border-radius: 2px; font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase">Simular esse modelo</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="ocasioes" style="padding: 96px 100px; display: flex; flex-direction: column; gap: 40px">
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 40px">
+      <h2 style="font-size: 46px; line-height: 1.06">Para que tipo de evento</h2>
+      <span style="font-size: 15px; color: #7E766C">de 20 a 70 pessoas</span>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px">
+      <div style="border: 1px solid rgba(245,241,234,0.12); padding: 30px 24px; display: flex; flex-direction: column; gap: 14px; min-height: 170px">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C9A063" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5s-7-4.3-7-9.2a3.7 3.7 0 0 1 7-1.8 3.7 3.7 0 0 1 7 1.8c0 4.9-7 9.2-7 9.2Z"></path></svg>
+        <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 24px; margin-top: auto">Casamento</span>
+      </div>
+      <div style="border: 1px solid rgba(245,241,234,0.12); padding: 30px 24px; display: flex; flex-direction: column; gap: 14px; min-height: 170px">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C9A063" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 20.5v-6.2c0-1.3 1-2.3 2.3-2.3h10.4c1.3 0 2.3 1 2.3 2.3v6.2Z"></path><path d="M12 12V8.4M12 5.6V3.5M4.5 17h15"></path></svg>
+        <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 24px; margin-top: auto">Anivers&aacute;rio</span>
+      </div>
+      <div style="border: 1px solid rgba(245,241,234,0.12); padding: 30px 24px; display: flex; flex-direction: column; gap: 14px; min-height: 170px">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C9A063" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5v17M7.5 8.5h9"></path><path d="M5 20.5h14"></path></svg>
+        <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 24px; margin-top: auto">Batizado</span>
+      </div>
+      <div style="border: 1px solid rgba(245,241,234,0.12); padding: 30px 24px; display: flex; flex-direction: column; gap: 14px; min-height: 170px">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C9A063" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7.5" width="18" height="12.5" rx="1.5"></rect><path d="M9 7.5V5.2c0-.7.6-1.2 1.2-1.2h3.6c.6 0 1.2.5 1.2 1.2v2.3"></path></svg>
+        <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 24px; margin-top: auto">Corporativo</span>
+      </div>
+      <div style="border: 1px solid rgba(245,241,234,0.12); padding: 30px 24px; display: flex; flex-direction: column; gap: 14px; min-height: 170px">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C9A063" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3.5v6.2a4 4 0 0 0 8 0V3.5Z"></path><path d="M12 13.9v6.6M8.5 20.5h7"></path></svg>
+        <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 24px; margin-top: auto">Confraterniza&ccedil;&atilde;o</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="orcamento" class="grain" style="position: relative; border-top: 1px solid rgba(245,241,234,0.10); padding: 100px; background: linear-gradient(150deg, #16110B 0%, #0A0908 65%); overflow: hidden">
+    <div style="position: relative; z-index: 2; display: flex; gap: 90px; align-items: flex-start">
+      <div style="flex: 1 1 auto; display: flex; flex-direction: column; gap: 32px; max-width: 480px">
+        <div style="display: flex; flex-direction: column; gap: 18px">
+          <span style="font-size: 12px; letter-spacing: 0.26em; text-transform: uppercase; color: #C9A063">Or&ccedil;amento</span>
+          <h2 style="font-size: 52px; line-height: 1.04">Conta pra gente<br>o seu evento.</h2>
+          <p style="font-size: 17px; line-height: 1.7; color: #A69D92">Data, n&uacute;mero de convidados e o tipo de evento j&aacute; bastam para montarmos a proposta.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 22px; padding-top: 8px; border-top: 1px solid rgba(245,241,234,0.12)">
+          <div style="display: flex; gap: 16px; align-items: flex-start; padding-top: 22px">
+            <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 26px; color: #C9A063; line-height: 1; width: 34px; flex: 0 0 auto">01</span>
+            <div style="display: flex; flex-direction: column; gap: 5px">
+              <span style="font-size: 17px; color: #F5F1EA">Voc&ecirc; envia os dados</span>
+              <span style="font-size: 15px; line-height: 1.6; color: #7E766C">Pelo formul&aacute;rio ou direto no WhatsApp.</span>
+            </div>
+          </div>
+          <div style="display: flex; gap: 16px; align-items: flex-start">
+            <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 26px; color: #C9A063; line-height: 1; width: 34px; flex: 0 0 auto">02</span>
+            <div style="display: flex; flex-direction: column; gap: 5px">
+              <span style="font-size: 17px; color: #F5F1EA">Retornamos com a proposta</span>
+              <span style="font-size: 15px; line-height: 1.6; color: #7E766C">Em at&eacute; [X horas &uacute;teis], com os dois modelos.</span>
+            </div>
+          </div>
+          <div style="display: flex; gap: 16px; align-items: flex-start">
+            <span style="font-family: 'Bodoni Moda', Didot, Georgia, serif; font-size: 26px; color: #C9A063; line-height: 1; width: 34px; flex: 0 0 auto">03</span>
+            <div style="display: flex; flex-direction: column; gap: 5px">
+              <span style="font-size: 17px; color: #F5F1EA">Voc&ecirc; visita o espa&ccedil;o</span>
+              <span style="font-size: 15px; line-height: 1.6; color: #7E766C">Combinamos um hor&aacute;rio para voc&ecirc; conhecer o sal&atilde;o.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="flex: 0 0 auto; width: 560px; border: 1px solid rgba(245,241,234,0.16); background: #0C0A09; padding: 42px 40px; display: flex; flex-direction: column; gap: 22px">
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px">
+          <div style="display: flex; flex-direction: column; gap: 9px">
+            <label for="nome">Seu nome</label>
+            <input id="nome" type="text" placeholder="Nome e sobrenome">
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 9px">
+            <label for="zap">WhatsApp</label>
+            <input id="zap" type="text" placeholder="(31) 9 0000-0000">
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 9px">
+          <label for="tipo">Tipo de evento</label>
+          <select id="tipo">
+            <option>Casamento</option>
+            <option>Anivers&aacute;rio</option>
+            <option>Batizado</option>
+            <option>Corporativo / apresenta&ccedil;&atilde;o</option>
+            <option>Confraterniza&ccedil;&atilde;o</option>
+            <option>Outro</option>
+          </select>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px">
+          <div style="display: flex; flex-direction: column; gap: 9px">
+            <label for="data">Data pretendida</label>
+            <input id="data" type="text" placeholder="00/00/0000">
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 9px">
+            <label for="pax">Convidados</label>
+            <input id="pax" type="text" placeholder="de 20 a 70">
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 9px">
+          <label for="msg">Alguma coisa que a gente precisa saber</label>
+          <textarea id="msg" rows="3" placeholder="Hor&aacute;rio, se quer gastronomia da casa, se j&aacute; tem buffet..."></textarea>
+        </div>
+        <button class="btn" style="border: none; cursor: pointer; background: #C9A063; color: #0A0908; padding: 20px; border-radius: 2px; font-family: 'Jost', 'Century Gothic', system-ui, sans-serif; font-size: 15px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 6px">Quero meu or&ccedil;amento</button>
+        <div style="display: flex; align-items: center; gap: 10px; justify-content: center">
+          <span style="height: 1px; flex: 1 1 auto; background: rgba(245,241,234,0.12)"></span>
+          <span style="font-size: 13px; color: #6F6860">ou</span>
+          <span style="height: 1px; flex: 1 1 auto; background: rgba(245,241,234,0.12)"></span>
+        </div>
+        <a class="ghost" href="#whatsapp" style="display: inline-flex; align-items: center; justify-content: center; gap: 10px; border: 1px solid rgba(245,241,234,0.25); color: #F5F1EA; padding: 18px; border-radius: 2px; font-size: 15px; letter-spacing: 0.05em">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 11.6a8.2 8.2 0 0 1-12 7.3L3.5 20.5l1.7-4.9a8.2 8.2 0 1 1 15.3-4Z"></path><path d="M8.6 12h.01M12 12h.01M15.4 12h.01"></path></svg>
+          Chamar no WhatsApp (31) 2527-5858
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer style="border-top: 1px solid rgba(245,241,234,0.10); padding: 46px 100px; display: flex; justify-content: space-between; align-items: center; background: #0A0908">
+    <span style="font-size: 14px; color: #7E766C">Av. do Contorno, 4667 &mdash; Serra, Belo Horizonte/MG &middot; (31) 2527-5858 &middot; @gastrohub.bh</span>
+    <span style="font-size: 13px; color: #6F6860">&copy; 2026 Gastr&ocirc; Hub</span>
+  </footer>
+
+</div>
+</x-dc>
+</body>
+</html>
