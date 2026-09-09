@@ -59,6 +59,17 @@
     .site-header { transition: none; }
   }
 
+  .demo-overlay { display: none; position: fixed; inset: 0; z-index: 200; align-items: center; justify-content: center; padding: 24px; background: rgba(6,5,4,0.78); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+  .demo-overlay.aberto { display: flex; }
+  .demo-caixa { max-width: 480px; width: 100%; background: #100E0C; border: 1px solid rgba(201,160,99,0.4); border-radius: 2px; padding: 40px 36px; display: flex; flex-direction: column; gap: 18px; }
+  .demo-tag { align-self: flex-start; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #0A0908; background: #C9A063; padding: 6px 12px; border-radius: 2px; }
+  .demo-caixa h2 { font-family: 'Bodoni Moda', Didot, Georgia, serif; font-weight: 400; font-size: 32px; line-height: 1.14; margin: 0; color: #F5F1EA; }
+  .demo-caixa p { margin: 0; font-size: 16px; line-height: 1.7; color: #A69D92; }
+  .demo-caixa .demo-real { padding-top: 16px; border-top: 1px solid rgba(245,241,234,0.12); font-size: 15px; color: #CFC7BB; }
+  .demo-caixa .demo-real strong { color: #F5F1EA; font-weight: 500; }
+  .demo-fechar { align-self: flex-start; margin-top: 6px; cursor: pointer; border: none; background: #C9A063; color: #0A0908; padding: 16px 30px; border-radius: 2px; font-family: 'Jost', 'Century Gothic', system-ui, sans-serif; font-size: 14px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; transition: background .2s ease; }
+  .demo-fechar:hover { background: #E3C48F; }
+
   /* Em telas largas a página para de esticar e fica centralizada. */
   body > div { max-width: 430px; margin: 0 auto; }
 </style>
@@ -87,7 +98,7 @@
       <span style="font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: #C9A063">Belo Horizonte &middot; Serra</span>
       <h1 style="font-size: 40px; line-height: 1.02; letter-spacing: -0.015em">Quatro cozinhas.<br><em style="color: #C9A063; font-style: italic">Uma mesa s&oacute;.</em></h1>
       <p style="font-size: 17px; line-height: 1.6; color: #A69D92">It&aacute;lia, China, Jap&atilde;o e Brasil no mesmo sal&atilde;o da Avenida do Contorno. Cada um pede o que quer, na mesma comanda.</p>
-      <a href="https://wa.me/553125275858" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: #C9A063; color: #0A0908; height: 58px; border-radius: 2px; font-size: 15px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 6px">
+      <a href="#demo" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: #C9A063; color: #0A0908; height: 58px; border-radius: 2px; font-size: 15px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 6px">
         <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 11.6a8.2 8.2 0 0 1-12 7.3L3.5 20.5l1.7-4.9a8.2 8.2 0 1 1 15.3-4Z"></path><path d="M8.6 12h.01M12 12h.01M15.4 12h.01"></path></svg>
         Reservar no WhatsApp
       </a>
@@ -243,14 +254,14 @@
       </div>
     </div>
     <div style="display: flex; flex-direction: column; gap: 7px">
-      <a href="tel:+553125275858" style="display: flex; align-items: center; min-height: 44px; font-size: 16px; color: #F5F1EA">(31) 2527-5858</a>
+      <a href="#demo" style="display: flex; align-items: center; min-height: 44px; font-size: 16px; color: #F5F1EA">(31) 2527-5858</a>
       <a href="https://www.instagram.com/gastrohub.bh/" style="display: flex; align-items: center; min-height: 44px; font-size: 16px">@gastrohub.bh</a>
     </div>
     <span style="font-size: 12px; color: #6F6860; padding-top: 6px; border-top: 1px solid rgba(245,241,234,0.08)">&copy; 2026 Gastr&ocirc; Hub &mdash; Restaurante e Espa&ccedil;o de Eventos</span>
   </footer>
 
   <div style="border-top: 1px solid rgba(245,241,234,0.14); background: #100E0C; padding: 12px 16px; display: flex; gap: 10px">
-    <a href="https://wa.me/553125275858" style="flex: 1 1 auto; display: flex; align-items: center; justify-content: center; gap: 9px; background: #C9A063; color: #0A0908; height: 52px; border-radius: 2px; font-size: 14px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase">
+    <a href="#demo" style="flex: 1 1 auto; display: flex; align-items: center; justify-content: center; gap: 9px; background: #C9A063; color: #0A0908; height: 52px; border-radius: 2px; font-size: 14px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 11.6a8.2 8.2 0 0 1-12 7.3L3.5 20.5l1.7-4.9a8.2 8.2 0 1 1 15.3-4Z"></path><path d="M8.6 12h.01M12 12h.01M15.4 12h.01"></path></svg>
       Reservar
     </a>
@@ -259,6 +270,15 @@
     </a>
   </div>
 
+</div>
+<div class="demo-overlay" id="demo-overlay" role="dialog" aria-modal="true" aria-labelledby="demo-titulo">
+  <div class="demo-caixa">
+    <span class="demo-tag">Demonstra&ccedil;&atilde;o</span>
+    <h2 id="demo-titulo">Este ainda n&atilde;o &eacute; o site oficial</h2>
+    <p>Esta &eacute; uma proposta de site para o Gastr&ocirc; Hub. Os bot&otilde;es de reserva e de or&ccedil;amento est&atilde;o desativados de prop&oacute;sito, para ningu&eacute;m acabar mandando mensagem ao restaurante achando que reservou mesa.</p>
+    <p class="demo-real">Para falar com o restaurante de verdade: <strong>(31) 2527-5858</strong><br>Av. do Contorno, 4667 &mdash; Serra, Belo Horizonte/MG</p>
+    <button type="button" class="demo-fechar">Entendi</button>
+  </div>
 </div>
 <script>
 (function () {
@@ -422,6 +442,31 @@
     }, { threshold: 0.4 });
     [].forEach.call(counters, function (el) { cio.observe(el); });
   }
+})();
+</script>
+<script>
+(function () {
+  var overlay = document.getElementById('demo-overlay');
+  if (!overlay) return;
+  var ultimoFoco = null;
+  var abrir = function (e) {
+    if (e) e.preventDefault();
+    ultimoFoco = document.activeElement;
+    overlay.classList.add('aberto');
+    var b = overlay.querySelector('.demo-fechar');
+    if (b) b.focus();
+  };
+  var fechar = function () {
+    overlay.classList.remove('aberto');
+    if (ultimoFoco && ultimoFoco.focus) ultimoFoco.focus();
+  };
+  // Qualquer contato: links de WhatsApp/telefone e o envio do formulário.
+  [].forEach.call(document.querySelectorAll('a[href="#demo"], button.btn'), function (el) {
+    el.addEventListener('click', abrir);
+  });
+  overlay.querySelector('.demo-fechar').addEventListener('click', fechar);
+  overlay.addEventListener('click', function (e) { if (e.target === overlay) fechar(); });
+  addEventListener('keydown', function (e) { if (e.key === 'Escape') fechar(); });
 })();
 </script>
 

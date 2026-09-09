@@ -7,7 +7,14 @@ const SRC = new URL('./', import.meta.url);
 const OUT = new URL('./preview/', import.meta.url);
 mkdirSync(OUT, { recursive: true });
 
-const ZAP = 'https://wa.me/553125275858';
+/* Enquanto DEMO for true, os botões de contato não abrem o WhatsApp do
+   restaurante: eles explicam que o site é uma proposta. Vira false no dia
+   em que o site for pra valer — e aí os links voltam a ser os de verdade. */
+const DEMO = true;
+
+const ZAP_REAL = 'https://wa.me/553125275858';
+const TEL_REAL = 'tel:+553125275858';
+const ZAP = DEMO ? '#demo' : ZAP_REAL;
 const INSTA = 'https://www.instagram.com/gastrohub.bh/';
 
 function unwrap(file) {
@@ -65,6 +72,9 @@ function fluid(html) {
    volta do espaço de eventos para o restaurante, entradas em cena.
    -------------------------------------------------------------------------- */
 function enhance(html, { spy } = {}) {
+  // Em demonstração, o telefone clicável também explica em vez de discar.
+  if (DEMO) html = html.split('href="' + TEL_REAL + '"').join('href="#demo"');
+
   // Cabeçalho passa a acompanhar a rolagem.
   html = html.replace('<header style="', '<header class="site-header" style="');
 
@@ -300,6 +310,59 @@ const SITE_JS = `<script>
 })();
 </script>`;
 
+/* --------------------------------------------------------------------------
+   Aviso de demonstração: o clique nos botões de contato abre uma explicação
+   em vez de mandar a pessoa para o WhatsApp do restaurante.
+   -------------------------------------------------------------------------- */
+const DEMO_CSS = `
+  .demo-overlay { display: none; position: fixed; inset: 0; z-index: 200; align-items: center; justify-content: center; padding: 24px; background: rgba(6,5,4,0.78); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+  .demo-overlay.aberto { display: flex; }
+  .demo-caixa { max-width: 480px; width: 100%; background: #100E0C; border: 1px solid rgba(201,160,99,0.4); border-radius: 2px; padding: 40px 36px; display: flex; flex-direction: column; gap: 18px; }
+  .demo-tag { align-self: flex-start; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #0A0908; background: #C9A063; padding: 6px 12px; border-radius: 2px; }
+  .demo-caixa h2 { font-family: 'Bodoni Moda', Didot, Georgia, serif; font-weight: 400; font-size: 32px; line-height: 1.14; margin: 0; color: #F5F1EA; }
+  .demo-caixa p { margin: 0; font-size: 16px; line-height: 1.7; color: #A69D92; }
+  .demo-caixa .demo-real { padding-top: 16px; border-top: 1px solid rgba(245,241,234,0.12); font-size: 15px; color: #CFC7BB; }
+  .demo-caixa .demo-real strong { color: #F5F1EA; font-weight: 500; }
+  .demo-fechar { align-self: flex-start; margin-top: 6px; cursor: pointer; border: none; background: #C9A063; color: #0A0908; padding: 16px 30px; border-radius: 2px; font-family: 'Jost', 'Century Gothic', system-ui, sans-serif; font-size: 14px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; transition: background .2s ease; }
+  .demo-fechar:hover { background: #E3C48F; }
+`;
+
+const DEMO_HTML = `<div class="demo-overlay" id="demo-overlay" role="dialog" aria-modal="true" aria-labelledby="demo-titulo">
+  <div class="demo-caixa">
+    <span class="demo-tag">Demonstra&ccedil;&atilde;o</span>
+    <h2 id="demo-titulo">Este ainda n&atilde;o &eacute; o site oficial</h2>
+    <p>Esta &eacute; uma proposta de site para o Gastr&ocirc; Hub. Os bot&otilde;es de reserva e de or&ccedil;amento est&atilde;o desativados de prop&oacute;sito, para ningu&eacute;m acabar mandando mensagem ao restaurante achando que reservou mesa.</p>
+    <p class="demo-real">Para falar com o restaurante de verdade: <strong>(31) 2527-5858</strong><br>Av. do Contorno, 4667 &mdash; Serra, Belo Horizonte/MG</p>
+    <button type="button" class="demo-fechar">Entendi</button>
+  </div>
+</div>`;
+
+const DEMO_JS = `<script>
+(function () {
+  var overlay = document.getElementById('demo-overlay');
+  if (!overlay) return;
+  var ultimoFoco = null;
+  var abrir = function (e) {
+    if (e) e.preventDefault();
+    ultimoFoco = document.activeElement;
+    overlay.classList.add('aberto');
+    var b = overlay.querySelector('.demo-fechar');
+    if (b) b.focus();
+  };
+  var fechar = function () {
+    overlay.classList.remove('aberto');
+    if (ultimoFoco && ultimoFoco.focus) ultimoFoco.focus();
+  };
+  // Qualquer contato: links de WhatsApp/telefone e o envio do formulário.
+  [].forEach.call(document.querySelectorAll('a[href="#demo"], button.btn'), function (el) {
+    el.addEventListener('click', abrir);
+  });
+  overlay.querySelector('.demo-fechar').addEventListener('click', fechar);
+  overlay.addEventListener('click', function (e) { if (e.target === overlay) fechar(); });
+  addEventListener('keydown', function (e) { if (e.key === 'Escape') fechar(); });
+})();
+</script>`;
+
 function page({ title, helmet, body, maxWidth = 1560, extraJs = '' }) {
   return `<!doctype html>
 <html lang="pt-BR">
@@ -312,14 +375,16 @@ function page({ title, helmet, body, maxWidth = 1560, extraJs = '' }) {
 <title>${title}</title>
 ${helmet.trim()}
 <style>
-${SITE_CSS}
+${SITE_CSS}${DEMO ? DEMO_CSS : ''}
   /* Em telas largas a página para de esticar e fica centralizada. */
   body > div { max-width: ${maxWidth}px; margin: 0 auto; }
 </style>
 </head>
 <body>
 ${body.trim()}
+${DEMO ? DEMO_HTML : ''}
 ${SITE_JS}
+${DEMO ? DEMO_JS : ''}
 ${extraJs}
 </body>
 </html>

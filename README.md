@@ -1,5 +1,11 @@
 # Gastrô Hub — site
 
+> **Proposta de site — ainda não é o site oficial do Gastrô Hub.**
+> Enquanto for demonstração, as páginas ficam fora dos buscadores (`noindex` +
+> `robots.txt`) e os botões de reserva não abrem o WhatsApp do restaurante:
+> o clique explica que o site é uma proposta. Quem quiser falar com o
+> restaurante de verdade liga para **(31) 2527-5858**.
+
 Site do **Gastrô Hub — Restaurante e Espaço de Eventos** (Av. do Contorno, 4667 — Serra, Belo Horizonte/MG).
 
 Quatro páginas estáticas, sem framework e sem etapa de build: HTML, CSS e um pouco de JavaScript.
@@ -45,8 +51,9 @@ precisa e um mockup não tem:
   rede de segurança: se a animação não rodar, o conteúdo aparece do mesmo jeito.
 - `prefers-reduced-motion` respeitado.
 - `noindex` + `robots.txt` bloqueando buscadores.
-
-
+- **Modo demonstração** (`const DEMO = true`, no topo do `build-preview.mjs`) —
+  os links de WhatsApp e telefone viram um aviso explicando que o site é uma
+  proposta. Virar para `false` devolve os links reais.
 
 ## Fontes
 
