@@ -46,36 +46,7 @@ precisa e um mockup não tem:
 - `prefers-reduced-motion` respeitado.
 - `noindex` + `robots.txt` bloqueando buscadores.
 
-## Rodar localmente
 
-```bash
-python -m http.server 4321 --directory preview
-```
-
-E abrir <http://localhost:4321>.
-
-## Publicar
-
-Arrastar a pasta `preview/` em <https://app.netlify.com/drop>. Para tirar do ar:
-Site configuration → General → Delete this site.
-
-## Antes de virar o site oficial
-
-Estes pontos estão marcados no código e **precisam de confirmação de quem é do
-restaurante**:
-
-- [ ] Trocar a logo desenhada pelo arquivo original (PNG/SVG)
-- [ ] Pratos assinatura do **Umai** e do **Bón** (estão entre colchetes)
-- [ ] Três avaliações reais do Google, com nome de quem escreveu
-- [ ] Confirmar a nota **4,8** e as **4.700+ avaliações**
-- [ ] Confirmar o ticket médio **R$ 80 a R$ 180**
-- [ ] Prazo de resposta do orçamento de eventos (`[X horas úteis]`)
-- [ ] CNPJ no rodapé
-- [ ] Incorporar o mapa do Google
-- [ ] Remover o `noindex` e o `robots.txt` quando for pra valer
-
-Os dados de contato, horários, capacidade e estrutura do espaço vieram de
-cobertura de imprensa e do perfil público do restaurante.
 
 ## Fontes
 
